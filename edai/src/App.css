@@ -1,0 +1,176 @@
+header {
+  background-color: #1E90FF;
+  padding: 5px;
+  margin: 5px;
+  margin-right: 20px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px black;
+  width: 99%;
+  height: 100px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+#logo {
+
+  width: 6.5%;
+  height: 80px;
+  margin: px;
+  box-shadow: 5px 5px 5px black;
+  border-radius: 50%;
+  background-color: white;
+  float: left;
+}
+
+#header-nav {
+
+  display: inline;
+  float: right;
+}
+
+#header-nav ul {
+
+  list-style: none;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
+
+#header-nav li {
+
+  display: inline-block;
+  margin-right:5px;
+  list-style: none;
+  text-decoration: none;
+}
+
+#header-nav button,
+#header-nav select {
+vertical-align: middle;
+}
+
+#header-nav .nav-tem {
+
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  text-shadow: 2px 2px 2px black;
+  box-shadow: 5px 5px 5px black;
+  border-radius: 20px;
+  border: 5px solid #000000;
+  background-color: #1E90FF;    
+}
+
+#header-nav .nav-tem:hover {
+
+  background-color: #00BFFF;
+  color: black;
+  box-shadow: 5px 5px 5px black;
+}
+
+#header-nav .nav-tem:active {
+
+  background-color: #00BFFF;
+  color: black;
+  box-shadow: 5px 5px 5px black;
+}
+
+.container {
+
+  display: grid;
+  width: 99%;
+  grid-template-columns: 18% 81.5%;
+  gap: 10px;
+  margin-top: 120px;
+}
+
+#school-topic-window {
+
+  box-shadow: 5px 5px 5px black;
+  border-radius: 10px;
+  background-color: gray;
+  padding: 10px;
+  height: 480px;
+}
+
+#school {
+
+  height: 150px;
+  box-shadow: 5px 5px 5px black;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  margin: 5px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#school-list-button {
+
+  border-radius: 5px;
+  background-color: #00B7EB;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  box-shadow: 5px 5px 5px black;
+  margin: 5px;
+  padding: 5px 20px;
+}
+
+#topic {
+
+  height: 260px;
+  margin-top: 160px;
+  box-shadow: 5px 5px 5px black;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#study-window {
+
+  box-shadow: 5px 5px 5px black;
+  border-radius: 10px;
+  background-color: white;
+  padding: 10px;
+  height: 480px;
+  right: 10px;
+  background-image: url(backgroundimage1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+#subjects {
+  
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); 
+  width: 99%;   
+  height: 30px;
+  box-shadow: 5px 5px 5px white;
+  border-radius: 10px;
+  background-color: rgb(4, 56, 116);
+  padding: 5px;
+  margin: px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
