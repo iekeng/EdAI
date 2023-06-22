@@ -87,7 +87,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <img id="logo" src="EdAI Logo.png" alt="Logo" />
+        <img id="logo" src={edailogo} alt="Logo" />
         <nav id="header-nav">
           <ul id="header-nav-list1">
             <li className="nav-item">
