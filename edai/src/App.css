@@ -99,7 +99,7 @@ vertical-align: middle;
   border-radius: 10px;
   background-color: gray;
   padding: 10px;
-  height: 480px;
+  height: 520px;
 }
 
 #school {
@@ -111,9 +111,13 @@ vertical-align: middle;
   padding: 10px;
   margin: 5px;
   text-align: center;
+}
+
+#school-title {
+
   font-size: 20px;
   font-weight: bold;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: 'Arial', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 #school-list-button {
@@ -132,16 +136,41 @@ vertical-align: middle;
 #topic {
 
   height: 260px;
-  margin-top: 160px;
+  margin-top: 0px;
   box-shadow: 5px 5px 5px black;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 10px;
   margin: 10px;
   text-align: center;
+}
+
+#topic h3 {
+
   font-size: 20px;
   font-weight: bold;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: 'Arial', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#topicslist {
+
+  list-style-type: none;
+  text-align: center;
+  left: px;
+}
+
+#topicslist li {
+
+  text-align: center;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #00B7EB;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  box-shadow: 5px 5px 5px black;
 }
 
 #study-window {
@@ -150,7 +179,7 @@ vertical-align: middle;
   border-radius: 10px;
   background-color: white;
   padding: 10px;
-  height: 480px;
+  height: 520px;
   right: 10px;
   background-image: url(backgroundimage1.jpg);
   background-repeat: no-repeat;
@@ -173,4 +202,58 @@ vertical-align: middle;
   font-size: 20px;
   font-weight: bold;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#contentdisplay {
+
+  height: 420px;
+  width: 100%;
+  margin-top: 5px;
+  padding: 0px, 5px, 0px, 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px black;
+  color: white;
+  z-index: 50;
+  overflow-y: auto;
+}
+
+#chatbot-window {
+  
+  position: fixed;
+  bottom: 10px;
+  right: 18px;
+  width: 20%;
+  height: 50px;
+  background-color: #f2f2f2;;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.chatbot-content {
+  
+  height: 90%;
+  overflow-y: auto;
+}
+
+#chatbot-window p {
+  
+  color: #000000;
+  margin: 0;
+  padding: 10px;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+}
+
+.chatbot-options {
+  height: 10%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px;
+}
+
+.typing-option,
+.audio-option {
+  margin-left: 10px;
 }
