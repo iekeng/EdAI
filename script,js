@@ -1,0 +1,31 @@
+<script>
+$(document).ready(function () {
+    $(".countrySelect").change( function () {
+        var selectedCountry = $(this).val();
+        const url = "/api/curriculums";
+        $.get(url, { county: selectedCountry }, function(response) {
+            if (response.length > 0) {
+                var curriculum = response[0];
+                $("#curriculum_id").val(curriculum.id);
+            } else {
+                $("#curriculum_id").val("");
+            }
+        });    
+    })
+});
+$(document).ready(function () {
+        $(".school-level").click( function () {
+            var selectedSchool = $(this).val();
+            const url = "/api/curriculums/{curriculum_id}/subjects";
+            $.get(url, { school: selectedSchool }, function(response) {
+                // Clear the previous content of the list
+                $('#topicList').html('');
+            
+                // Iterate over the fetched topics and append them to the list
+                response.forEach(function(topic) {
+                    $('#topicList').append('<li>' + topic + '</li>');
+            });
+        });
+    });
+});
+</script>
