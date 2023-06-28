@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from './UserContext';
-import './App.css';
 import edailogo from './EdAI Logo.png';
 import sendSvg from './send-svg.png';
 import audioSvg from './audio-svg.png';
@@ -66,7 +65,7 @@ const Profile = () => {
           const response = await fetch(`/profile/${user.id}`);
           const data = await response.json();
           // Update the user context with the fetched user data
-          //setUser(data);
+          setUser(data);
         }
       } catch (error) {
         console.log('Error fetching user data:', error);
@@ -299,7 +298,7 @@ function ChatWindow() {
   );
 }
 
-function App() {
+function StudentEnvironmentPage() {
   return (
     <div className="App">
       <header>
@@ -368,4 +367,4 @@ function App() {
   );
 }
 
-export default App;
+export default StudentEnvironmentPage;
