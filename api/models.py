@@ -27,11 +27,10 @@ class Student(db.Model):
     password = db.Column(db.String(45), nullable=False)
     region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
 
-    def __init__(self, region_id, firstname, lastname, email, password):
+    def __init__(self, firstname, lastname, email, password):
         self.firstname = firstname
         self.lastname = lastname
         self.email = email
-        self.region_id = region_id
         self.password = password
 
     def __repr__(self):
@@ -41,11 +40,11 @@ class Country(db.Model):
     __tablename__ = 'country'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), unique=True)
-    zone = db.Column(db.String(100), db.ForeignKey('region.name'))
+    subjects = db.relationship('Subject', backref='country')
+    region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
 
-    def __init__(self, name, zone):
+    def __init__(self, name):
         self.name = name
-        self.zone = zone
 
     def __repr__(self):
         return '<Country {}>'.format(self.name)
@@ -54,8 +53,9 @@ class Curriculum(db.Model):
     __tablename__ = 'curriculum'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200), unique=True)
+    name = db.Column(db.String(200))
     region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
+    subjects = db.relationship('Subject', backref='curriculum')
 
     def __init__(self, name, region_id):
         self.name = name
@@ -70,12 +70,12 @@ class Subject(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), unique=True)
     topics = db.relationship('Topic', backref='subject')
-    curriculum_name = db.Column(db.String(100), db.ForeignKey('curriculum.name'))
+    curriculum_id = db.Column(db.Integer, db.ForeignKey('curriculum.id'))
+    country_id = db.Column(db.Integer, db.ForeignKey('country.id'))
 
-    def __init__(self, name, curriculum_name, country_name):
+    def __init__(self, name, curriculum_id):
         self.name = name
-        self.curriculum_name = curriculum_name
-        self.country_name = country_name
+        self.curriculum_id = curriculum_id
         
     def __repr__(self):
         return '<Subject {}>'.format(self.name)
@@ -86,11 +86,14 @@ class Topic(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), unique=True)
     content = db.Column(db.Text)
+    curriculum_id = db.Column(db.Integer, db.ForeignKey('curriculum.id'))
     subject_id = db.Column(db.Integer, db.ForeignKey('subject.id'))
 
-    def __init__(self, name, subject_id):
+    def __init__(self, name, curriculum_id, subject_id, content):
         self.name = name
         self.subject_id = subject_id
+        self.curriculum_id = curriculum_id
+        self.content = content
 
     def __repr__(self):
         return '<Topic ()>'.format(self.name)
