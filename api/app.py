@@ -1,13 +1,19 @@
 import  os
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from .models import *
 from . import create_app
 
 app = create_app()
 
+cors = CORS()
+cors.init_app(app)
+
 @app.get('/api/countries', strict_slashes=False)
 def get_countries():
     countries = Country.query.all()
+    if countries is None:
+        return jsonify({'error': 'Countries not found'}), 404
     countries_list = [{'id': country.id, 'name': country.name} for country in countries]
     return jsonify(countries_list), 200
 
