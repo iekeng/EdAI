@@ -1,15 +1,17 @@
 from flask_sqlalchemy import SQLAlchemy
+# from flask_migrate import Migrate
 
-db = SQLAlchemy() 
+db = SQLAlchemy()
+# migrate = Migrate()
 
 class Region(db.Model):
     __tablename__ = 'region'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    students = db.relationship('Student', backref='region')
+    name = db.Column(db.String(100), unique=True, nullable=False)
+    # students = db.relationship('Student', backref='region')
     countries = db.relationship('Country', backref='region')
-    curriculums = db.relationship('Curriculum', backref='region')
+    # curriculums = db.relationship('Curriculum', backref='region')
     
     def __init__(self, name):
         self.name = name
@@ -17,33 +19,17 @@ class Region(db.Model):
     def __repr__(self):
         return '<Region {}>'.format(self.name)
 
-class Student(db.Model):
-    __tablename__ = 'student'
-
-    id = db.Column(db.Integer, primary_key=True)
-    firstname = db.Column(db.String(45), nullable=False)
-    lastname = db.Column(db.String(45), nullable=False)
-    email = db.Column(db.String(100), nullable=False, unique=True)
-    password = db.Column(db.String(45), nullable=False)
-    region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
-
-    def __init__(self, firstname, lastname, email, password):
-        self.firstname = firstname
-        self.lastname = lastname
-        self.email = email
-        self.password = password
-
-    def __repr__(self):
-        return '<Student {} {}>'.format(self.firstname, self.lastname)
-
 class Country(db.Model):
     __tablename__ = 'country'
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), unique=True)
-    subjects = db.relationship('Subject', backref='country')
     region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
+    curriculums = db.relationship('Curriculum', backref='country')
+    # subjects = db.relationship('Subject', backref='country')
 
-    def __init__(self, name):
+    def __init__(self, name, region_id):
+        self.region_id = region_id
         self.name = name
 
     def __repr__(self):
@@ -53,13 +39,14 @@ class Curriculum(db.Model):
     __tablename__ = 'curriculum'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200))
-    region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
+    name = db.Column(db.String(200), nullable=False)
+    country_id = db.Column(db.Integer, db.ForeignKey('country.id'))
+    students = db.relationship('Student', backref=('curriculum'))
     subjects = db.relationship('Subject', backref='curriculum')
 
-    def __init__(self, name, region_id):
+    def __init__(self, name, country_id):
         self.name = name
-        self.region_id = region_id
+        self.country_id = country_id
 
     def __repr__(self):
         return '<Curriculum {}>'.format(self.name)
@@ -68,10 +55,10 @@ class Subject(db.Model):
     __tablename__= 'subject'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), unique=True)
-    topics = db.relationship('Topic', backref='subject')
+    name = db.Column(db.String(255), unique=True, nullable=False)
+    # topics = db.relationship('Topic', backref='subject')
     curriculum_id = db.Column(db.Integer, db.ForeignKey('curriculum.id'))
-    country_id = db.Column(db.Integer, db.ForeignKey('country.id'))
+    # country_id = db.Column(db.Integer, db.ForeignKey('country.id'))
 
     def __init__(self, name, curriculum_id):
         self.name = name
@@ -84,16 +71,36 @@ class Topic(db.Model):
     __tablename__ = 'topic'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), unique=True)
+    name = db.Column(db.String(255), unique=True, nullable=False)
     content = db.Column(db.Text)
-    curriculum_id = db.Column(db.Integer, db.ForeignKey('curriculum.id'))
+    # curriculum_id = db.Column(db.Integer, db.ForeignKey('curriculum.id'))
     subject_id = db.Column(db.Integer, db.ForeignKey('subject.id'))
 
-    def __init__(self, name, curriculum_id, subject_id, content):
+    def __init__(self, name, subject_id, content):
         self.name = name
         self.subject_id = subject_id
-        self.curriculum_id = curriculum_id
         self.content = content
 
     def __repr__(self):
         return '<Topic ()>'.format(self.name)
+
+class Student(db.Model):
+    __tablename__ = 'student'
+
+    id = db.Column(db.Integer, primary_key=True)
+    firstname = db.Column(db.String(45), nullable=False)
+    lastname = db.Column(db.String(45), nullable=False)
+    email = db.Column(db.String(100), nullable=False, unique=True)
+    password = db.Column(db.String(45), nullable=False)
+    # region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
+    curriculum_id = db.Column(db.Integer, db.ForeignKey('curriculum.id'))
+
+    def __init__(self, firstname, lastname, email, password, curriculum_id):
+        self.firstname = firstname
+        self.lastname = lastname
+        self.email = email
+        self.password = password
+        self.curriculum_id = curriculum_id
+
+    def __repr__(self):
+        return '<Student {} {}>'.format(self.firstname, self.lastname)
