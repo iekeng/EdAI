@@ -1,11 +1,29 @@
+import os, openai
 from flask import request, jsonify
+from dotenv import load_dotenv, find_dotenv
 from flask_cors import CORS
 from . import *
 
+load_dotenv(find_dotenv())
 app = create_app()
-
 cors = CORS()
 cors.init_app(app)
+openai.api_key = os.environ['OPENAI_API_KEY']
+
+@app.post('/api/chatbot', strict_slashes=False)
+def chatbot(model="gpt-3.5-turbo"):
+    messages = []
+    prompt = request.json['prompt']
+    new_message = {"role": "user", "content": prompt}
+    messages.append(new_message)
+
+    response = openai.ChatCompletion.create(
+        model=model,
+        messages=messages,
+        temperature=0.2
+    )
+    result = response.choices[0].message["content"]
+    return jsonify({"message": result})
 
 @app.get('/api/regions', strict_slashes=False)
 def get_regions():
