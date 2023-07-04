@@ -121,7 +121,6 @@ def post_student(id):
                         'email': student.email}), 200
     except Exception as e:
         return e.message
-    
 
 @app.get('/api/curriculums', strict_slashes=False)
 def get_curriculums():
@@ -141,6 +140,18 @@ def get_curriculums_by_country(id):
     country = Country.query.get(id)
     result = [{'id': curriculum.id, 'curriculum': curriculum.name } for curriculum in country.curriculums]
     return jsonify(result)
+
+@app.get('/api/country/<int:id>/curriculum/<int:num>/subjects', strict_slashes=False)
+def get_curriculum_subjects(id, num):
+    curriculum = Curriculum.query.get(num)
+    if curriculum.country_id != id:
+        return jsonify({'error': 'Curriculum not specified'}), 404
+    subjects = Subject.query.filter_by(curriculum_id=num).all()
+    all_subjects = [{'id': subject.id, 
+                     'name': subject.name} 
+                     for subject in subjects]
+    return jsonify(all_subjects), 200
+
 
 @app.get('/api/curriculum/<int:id>', strict_slashes=False)
 def get_curriculum(id):
