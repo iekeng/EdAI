@@ -26,7 +26,7 @@ __POST__ /profiles/{id}: adds a single user with <id> to db
 __GET__ /profile/{id>} retrives user's info from db  
 __PUT__ /profile/edit/{id} updates user information  
 __GET__ /curriculums: retrieves all curriculums from db  
-__GET__ /curriculum/{d}: retrieves specific curriculum with id
+__GET__ /curriculum/{d}: retrieves specific curriculum with id  
 __GET__ /curriculum/{id}/subjects: retrieves subjects from a specific curriculum  
 __GET__ /curriculum/{id}/subject/{id}: retrieves specific subject of a curriculum  
 __GET__ /curriculum/{id}/subject/{id}/topics: retrieves all topics and topic content from a subject in a curriculum  
