@@ -10,14 +10,10 @@ The base URL for all API requests is `https://edai.com/api`
 
 ## Error Handling
 
-The API follows standard HTTP status codes to indicate the success or failure of a request. Error responses will include a JSON payload with the following structure:  
-`
-{"error": "Resource not specified"}
-`
-OR  
-`
-{"error": "Resource not found"}
-`
+Error response include a JSON payload with the following structures:  
+* `{"error": "Resource not specified"}`
+* `{"error": "Resource not found"}`
+
 ## Endpoints
 POST /chatbot: sends message to chatbot  
 GET /countries: retrives all countries in db  
