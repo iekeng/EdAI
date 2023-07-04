@@ -28,8 +28,8 @@ __PUT__ /profile/edit/{id} updates user information
 __GET__ /curriculums: retrieves all curriculums from db  
 __GET__ /curriculum/{d}: retrieves specific curriculum with id
 __GET__ /curriculum/{id}/subjects: retrieves subjects from a specific curriculum  
-GET /curriculum/{id}/subject/{id}: retrieves specific subject of a curriculum  
-GET /curriculum/{id}/subject/{id}/topics: retrieves all topics and topic content from a subject in a curriculum  
+__GET__ /curriculum/{id}/subject/{id}: retrieves specific subject of a curriculum  
+__GET__ /curriculum/{id}/subject/{id}/topics: retrieves all topics and topic content from a subject in a curriculum  
 
 ## Conclusion
 This API documentation provides an overview of the available endpoints, request/response formats and authentication requirements for the EdAI API.
