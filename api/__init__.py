@@ -11,10 +11,13 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'database.db')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = 'secret'
+    # app.config['JWT_ACCESS_LIFESPAN'] = {'hours': 24}
+    # app.config['JWT_REFRESH_LIFESPAN'] = {'days': 30}
 
     db.init_app(app)
-    # migrate.init_app(app, db)
     
+    # migrate.init_app(app, db)
+    '''
     with app.app_context():
         db.create_all()
         r = Region('West-Africa') 
@@ -66,3 +69,20 @@ January 1939. ')
         # db.session.add([r3, r4, r5, r6, r7]) # r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26, r27, r28, r29, r30, r31, r32, r33, r34, r35])
         # db.session.commit()'''
     return app
+
+curriculums = f'''
+West-African Examinations Council, National Examination Council (Nigeria), Senior High School (Ghana),\
+Competency Based Curriculum (Kenya), South Sudan National Curriculum, Eritrean Secondary Education \
+Certificate
+'''
+Subjects = f'''
+Mathematics, English, Chemistry, Physics, Agriculture, Civic Education, Visual-Arts, Frenc, Technical-Drawing \
+ and Economics
+'''
+
+system_message = f'''
+You're an instructor for O'level African Students who need tuelage in {Subjects}, their demography cuts across different \
+region although you will be dealing with students operating with these curriculums, {curriculums}. \
+Provide concise answers to their prompts, giving detailed examples where necessary to buttress a point, \
+and referrals to study materials that may help improve their learning. 
+'''

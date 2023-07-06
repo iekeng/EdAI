@@ -1,18 +1,54 @@
 import os, openai
 from flask import request, jsonify
+# from flask_praetorian import Praetorian, auth_required
 from dotenv import load_dotenv, find_dotenv
 from flask_cors import CORS
 from . import *
 
 load_dotenv(find_dotenv())
+
 app = create_app()
 cors = CORS()
+# guard = Praetorian()
+
 cors.init_app(app)
+# guard.init_app(app, Student)
+
 openai.api_key = os.environ['OPENAI_API_KEY']
+
+# @app.post('/api/register', strict_slashes=False)
+# def register_student():
+#     firstname = request.json['firstname']
+#     lastname = request.json['lastname']
+#     email = request.json['email']
+#     pwd = request.json['password']
+
+#     password = guard.hash_password(pwd)
+
+#     new_student = Student(firstname, lastname, email, password, 1)
+
+#     db.session.add(new_student)
+#     db.session.commit()
+
+# @app.post('/api/login',  strict_slashes=False)
+# def login_student():
+#     email = request.json['email']
+#     password = request.json['password']
+
+#     student = guard.authenticate(email, password)
+#     access_token = guard.encode_jwt_token(student)
+#     refresh_token = guard.encode_jwt_refresh_token(student)
+
+#     return jsonify({'access_token': access_token,
+#                     'refresh_token': refresh_token})
+
+#     return jsonify({'feedback': 'User registered successfully'})
 
 @app.post('/api/chatbot', strict_slashes=False)
 def chatbot(model="gpt-3.5-turbo"):
-    messages = []
+    messages = [
+        {"role": "system", "content": system_message}
+    ]
     prompt = request.json['prompt']
     new_message = {"role": "user", "content": prompt}
     messages.append(new_message)
@@ -20,7 +56,7 @@ def chatbot(model="gpt-3.5-turbo"):
     response = openai.ChatCompletion.create(
         model=model,
         messages=messages,
-        temperature=0.2
+        temperature=0.2,
     )
     result = response.choices[0].message["content"]
     return jsonify({"message": result})
@@ -174,9 +210,9 @@ def get_curriculum_subjects(id, num):
 @app.get('/api/curriculum/<int:id>', strict_slashes=False)
 def get_curriculum(id):
     curriculum = Curriculum.query.get(id)
-    country = Country.query.filter_by(id=curriculum.country_id).first()
     if curriculum is None:
         return jsonify({'error': 'Curriculum not found'}), 404
+    country = Country.query.filter_by(id=curriculum.country_id).first()
     return jsonify({'id': curriculum.id, 
                     'curriculum': curriculum.name,
                     'country': country.name})
