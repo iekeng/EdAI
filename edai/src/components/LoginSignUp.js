@@ -110,7 +110,7 @@ const LoginSignupPage = () => {
         </div>
         <div>
           <label className='input-label'>Password:</label>
-          <input id='pass-input' type="password" value={password} onChange={handlePasswordChange} required/>
+          <input className='LSInput' id='pass-input' type="password" value={password} onChange={handlePasswordChange} required/>
         </div>
         {!isLoginMode && (
           <div>
