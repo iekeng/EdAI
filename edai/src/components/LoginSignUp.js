@@ -101,7 +101,7 @@ const LoginSignupPage = () => {
         {!isLoginMode && (
           <div>
             <label className='input-label'>Name:</label>
-            <input id='name-input' type="text" value={name} onChange={handleNameChange} required/>
+            <input className='LSInput' id='name-input' type="text" value={name} onChange={handleNameChange} required/>
           </div>
         )}
         <div>
