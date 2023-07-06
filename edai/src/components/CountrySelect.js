@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function CountrySelect({ onCountryChange }) {
+function CountrySelect({ onCountryChange, setGlobalCountryId }) {
     const [countryId, setCountryId] = useState('');
   
     useEffect(() => {
@@ -28,6 +28,7 @@ function CountrySelect({ onCountryChange }) {
   
     const handleCountryChange = (event) => {
       setCountryId(event.target.value);
+      setGlobalCountryId(countryId)
     };
   
     return (

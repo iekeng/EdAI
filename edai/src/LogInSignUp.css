@@ -1,3 +1,20 @@
+#LS-Header {
+
+  background-color: #1E90FF;
+  padding: 5px;
+  margin: 5px;
+  margin-right: 20px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px black;
+  width: 99%;
+  height: 100px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  box-sizing: border-box;
+}
 .container {
   display: flex;
   justify-content: center;
@@ -7,8 +24,14 @@
 
 .loginSignUp {
   max-width: 400px;
+  margin-top: 10%;
+  margin-left: 35%;
+  justify-content: center;
+  align-items: center;
   padding: 20px;
   background-color: #f2f2f2;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px black;
 }
 
 h1 {
@@ -18,10 +41,21 @@ h1 {
 form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 label {
-  margin-bottom: 5px;
+  margin-bottom: 5px; 
+}
+
+.input-label {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 input {
@@ -31,13 +65,18 @@ input {
   border-radius: 4px;
 }
 
+#email-input {
+  margin-left: px;
+}
+
 button[type="submit"] {
   padding: 10px 15px;
-  background-color: #4caf50;
+  background-color: black;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  
 }
 
 button[type="submit"]:hover {
@@ -55,7 +94,7 @@ button {
 }
 
 button:hover {
-  background-color: #3c79d1;
+  background-color: #45a049;
 }
 
 p {

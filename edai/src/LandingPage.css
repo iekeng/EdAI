@@ -1,0 +1,66 @@
+#LP-Header{
+
+    background-color: #1E90FF;
+    padding: 5px;
+    margin: 5px;
+    margin-right: 20px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px black;
+    width: 99%;
+    height: 100px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    box-sizing: border-box;
+  }
+
+#Valp-Curr {
+
+    display: grid;
+    width: 99%;
+    grid-template-columns: 40% 58%;
+    gap: 10px;
+    margin-top: 120px;
+    height: 300px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px black;
+}
+
+#Valueproposition {
+
+  background-image: url('../Students studying image.avif');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 99%;
+  border-radius: 10px;
+}
+
+#Valueproposition h1 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+#Valueproposition p {
+
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 50%;
+  line-height: 1;
+  margin-left: 25%;
+}
+
+#testimonials {
+
+    display: block;
+    width: 99%;
+    margin-top: 20px;
+    height: 200px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px black;
+}

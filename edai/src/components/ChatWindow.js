@@ -25,7 +25,7 @@ function ChatWindow() {
         setIsLoading(true);
   
         // Make the API request
-        const response = await fetch('API_ENDPOINT', {
+        const response = await fetch('/api/chatbot/<str:prompt>', {
           method: 'POST',
           body: JSON.stringify({ request: userInput }),
           headers: {
@@ -51,6 +51,12 @@ function ChatWindow() {
     };
   
     const getWindowStyle = () => {
+      if (isLoading) {
+        return {
+          height: 'auto',
+          maxHeight: '100px'
+        }
+      }
       if (isTyping) {
         return {
           width: '40%',
@@ -63,10 +69,32 @@ function ChatWindow() {
         };
       }
     };
+
+    const chatbotContent = () => {
+      if (isLoading) {
+        return {
+          display: '',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: '0 10px',
+          overflowY: 'auto',
+          zIndex: '40',
+        }
+      }
+      return {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        height: '100%',
+        padding: '0 10px',
+        overflowY: 'auto',
+        zIndex: '40',
+      }
+    }
   
     return (
       <div className="chatbot-window" style={getWindowStyle()}>
-        <div className="chatbot-content">
+        <div style={chatbotContent()} className="chatbot-content-old">
           <input
             type="text"
             className="chatbot-input"
@@ -83,8 +111,9 @@ function ChatWindow() {
           <button className="chatbot-options" id="audio-option" disabled={isLoading}>
             <img className='button-img' src={audioSvg} alt='Audio Icon'/>
           </button>
+          <br/>
           {isLoading ? (
-            <p className="chatbot-feedback">Loading...</p>
+            <p style={{display: 'block'}} className="chatbot-feedback">Loading...</p>
           ) : (
             <p className="chatbot-feedback">{feedback}</p>
           )}

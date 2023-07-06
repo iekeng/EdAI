@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
-const CurriculumSelect = ({ selectedCountry }) => {
+const CurriculumSelect = ({ selectedCountry, globalCountryId }) => {
   const [curriculum, setCurriculum] = useState('');
   
   useEffect(() => {
     const fetchCurriculumData = async () => {
       try {
         // Make an API request to fetch the curriculum data for the selected country
-        const response = await fetch(`/api/curriculums`);
+        const response = await fetch(`https://edai.com/api/country/${globalCountryId}/curriculums`);
         const data = await response.json();
 
         // Set the curriculum state with the fetched data
@@ -18,10 +18,11 @@ const CurriculumSelect = ({ selectedCountry }) => {
     };
 
     //Call the fetchCurriculumData function when the selectedCountry state changes
-    if (selectedCountry) {
+    if (globalCountryId && globalCountryId !== "") {
+      console.log('fetch curriculum called')
       fetchCurriculumData();
     }
-  }, [selectedCountry]);
+  }, [globalCountryId]);
 
   return (
     <div>
