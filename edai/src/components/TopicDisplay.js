@@ -20,11 +20,10 @@ function TopicDisplay({ subjectId, globalCountryId }) {
 
       fetchTopicsData();
 
-  }, [subjectId]);
+  }, [subjectId, globalCountryId]);
 
   let content;
     if (isSubjectSelected) {
-      // setTopics(data)
       
       content = (
         <ul style={{listStyle: "none"}}>

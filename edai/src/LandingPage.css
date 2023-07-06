@@ -1,3 +1,12 @@
+#LPContainer {
+
+   width: 99%;
+   background: linear-gradient(to right, #d5dbdb, #3db9c9);
+   /* background-image: url('./backgroundimage1.jpg');
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: center; */
+}
 #LP-Header{
 
     background-color: #1E90FF;
@@ -18,30 +27,34 @@
 
 #Valp-Curr {
 
-    display: grid;
-    width: 99%;
-    grid-template-columns: 40% 58%;
-    gap: 10px;
-    margin-top: 120px;
-    height: 300px;
-    border-radius: 10px;
-    box-shadow: 5px 5px 5px black;
+  display: block;
+  margin-top: 120px;
+  height: 500px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px black;
+  /* background: linear-gradient(to right, #d5dbdb, #3db9c9); */
 }
 
 #Valueproposition {
 
-  background-image: url('../Students studying image.avif');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  width: 99%;
+  display: block;
+  margin-top: 0px;
+  height: 390px;
   border-radius: 10px;
+  box-shadow: 5px 5px 5px black;
+  /* background-image: url('../study-group-img.avif'); */
 }
 
-#Valueproposition h1 {
-  font-size: 28px;
+#Valp-h1 {
+
+  padding-top: 40px;
+  font-size: 50px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-left: 20px;
+  text-align: left;
+  color: rgb(4, 73, 73);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-style: italic;
 }
 
 #Valueproposition p {
@@ -50,17 +63,40 @@
   font-size: 15px;
   font-weight: bold;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  width: 50%;
-  line-height: 1;
-  margin-left: 25%;
+  font-style: italic;
+  width: 40%;
+  margin-left: 20px;
+  text-align: left;
+}
+
+#LPbutton {
+
+  margin-top: 10px;
+  padding: 8px 15px;
+  background-color: #4285f4;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+#Curriculum {
+
+  display: block;
+  margin-top: 10px;
+  height: 390px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px black;
+  /* background: linear-gradient(to right, #d5dbdb, #3db9c9); */
 }
 
 #testimonials {
 
     display: block;
     width: 99%;
-    margin-top: 20px;
-    height: 200px;
+    margin-top: 120px;
+    height: 100px;
     border-radius: 10px;
     box-shadow: 5px 5px 5px black;
 }
