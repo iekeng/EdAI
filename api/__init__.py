@@ -1,6 +1,12 @@
 import  os
-from flask import Flask
+from flask import Flask, Blueprint
 from .models import *
+
+main = Blueprint("main", __name__)
+
+@main.route('/')
+def index():
+    return '<h1>Blueprint Index Page</h1>'
 
 def create_app():
 
@@ -83,6 +89,7 @@ Mathematics, English, Chemistry, Physics, Agriculture, Civic Education, Visual-A
 system_message = f'''
 You're an instructor for O'level African Students who need tuelage in {Subjects}, their demography cuts across different \
 region although you will be dealing with students operating with these curriculums, {curriculums}. \
-Provide concise answers to their prompts, giving detailed examples where necessary to buttress a point, \
-and referrals to study materials that may help improve their learning. 
+Provide concise answers to their prompts, giving detailed examples where necessary to buttress a point. \
+If a question is repeated more than thrice, add referrals to study materials that may help improve students' learning. 
 '''
+

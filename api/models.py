@@ -56,7 +56,7 @@ class Subject(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), unique=True, nullable=False)
-    # topics = db.relationship('Topic', backref='subject')
+    topics = db.relationship('Topic', backref='subject')
     curriculum_id = db.Column(db.Integer, db.ForeignKey('curriculum.id'))
     # country_id = db.Column(db.Integer, db.ForeignKey('country.id'))
 
