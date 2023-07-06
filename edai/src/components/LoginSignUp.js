@@ -106,7 +106,7 @@ const LoginSignupPage = () => {
         )}
         <div>
           <label className='input-label'>Email:</label>
-          <input id='email-input' type="email" value={email} onChange={handleEmailChange} required/>
+          <input className='LSInput' id='email-input' type="email" value={email} onChange={handleEmailChange} required/>
         </div>
         <div>
           <label className='input-label'>Password:</label>
@@ -126,17 +126,17 @@ const LoginSignupPage = () => {
           </div>
         )}
         {/* <Link to='/Dashboard'><button type="submit">{isLoginMode ? 'Login' : 'SignUp'}</button></Link> */}
-        <button type='submit'>{isLoginMode ? 'Login' : 'SignUp'}</button>
+        <button className='LSbutton' type='submit'>{isLoginMode ? 'Login' : 'SignUp'}</button>
       </form>
       <div>
         <p>
           {isLoginMode ? "Don't have an account?" : 'Already have an account?'}
-          <button onClick={handleToggleMode}>{isLoginMode ? 'SignUp' : 'Login'}</button>
+          <button className='LSbutton' onClick={handleToggleMode}>{isLoginMode ? 'SignUp' : 'Login'}</button>
         </p>
         <p>Or sign in with:</p>
         <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-          <button className='Google-FB-Button' onClick={handleGoogleAuth}>Google</button>
-          <button className='Google-FB-Button' onClick={handleFacebookAuth}>Facebook</button>
+          <button className='LSbutton' onClick={handleGoogleAuth}>Google</button>
+          <button className='LSbutton' onClick={handleFacebookAuth}>Facebook</button>
         </div>
       </div>
     </div>
