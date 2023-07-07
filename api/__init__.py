@@ -35,7 +35,7 @@ def create_app():
     # from .api import api as api_blueprint    
     # app.register_blueprint(api_blueprint)
 
-    with app.app_context():
+    '''with app.app_context():
         guard.init_app(app, Student)
         db.create_all()
         r = Region('West-Africa') 
