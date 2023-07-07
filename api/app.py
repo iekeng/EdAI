@@ -1,50 +1,36 @@
 import os, openai
-from flask import request, jsonify, Blueprint
-# from flask_praetorian import Praetorian, auth_required
+from flask import request, jsonify
+from flask_praetorian import auth_required, current_user
 from dotenv import load_dotenv, find_dotenv
-from flask_cors import CORS
 from . import *
 
 load_dotenv(find_dotenv())
 
 app = create_app()
-cors = CORS()
-# guard = Praetorian()
-
-cors.init_app(app)
-# guard.init_app(app, Student)
 
 openai.api_key = os.environ['OPENAI_API_KEY']
 
-# @app.post('/api/auth/register', strict_slashes=False)
-# def register_student():
-#     firstname = request.json['firstname']
-#     lastname = request.json['lastname']
-#     email = request.json['email']
-#     pwd = request.json['password']
+@main.post('/auth/login', strict_slashes=False)
+def login():
+    email = request.json['email']
+    password = request.json['password']
+    student = guard.authenticate(email, password)
+    result = {'access_token': guard.encode_jwt_token(student)}
+    return result
 
-#     password = guard.hash_password(pwd)
+@main.post('/auth/refresh', strict_slashes=False)
+def refresh():
+    old_token = request.json['something']
+    new_token = guard.refresh_jwt_token(old_token)
+    result = {'access_token': new_token}
+    return result
 
-#     new_student = Student(firstname, lastname, email, password, 1)
+@main.get('/protected', strict_slashes=False)
+@auth_required
+def protected():
+    return f'protected endpoint (allowed user {current_user().email})'
 
-#     db.session.add(new_student)
-#     db.session.commit()
-
-# @app.post('/api/auth/login',  strict_slashes=False)
-# def login_student():
-#     email = request.json['email']
-#     password = request.json['password']
-
-#     student = guard.authenticate(email, password)
-#     access_token = guard.encode_jwt_token(student)
-#     refresh_token = guard.encode_jwt_refresh_token(student)
-
-#     return jsonify({'access_token': access_token,
-#                     'refresh_token': refresh_token})
-
-#     return jsonify({'feedback': 'User registered successfully'})
-
-@main.route('/chatbot', strict_slashes=False)
+@main.post('/chatbot', strict_slashes=False)
 def chatbot(model="gpt-3.5-turbo"):
     messages = [
         {"role": "system", "content": system_message}
@@ -224,27 +210,6 @@ def get_curriculum(id):
                     'curriculum': curriculum.name,
                     'country': country.name})
 
-# @main.get('/curriculum/<int:id>/subjects', strict_slashes=False)
-# def get_subjects(id):
-#     subjects = Subject.query.filter_by(curriculum_id=id).all()
-#     if subjects is None:
-#         return jsonify({'error': 'Subjects not found'}), 404
-#     all_subjects = [{'id': subject.id, 
-#                      'name': subject.name} 
-#                      for subject in subjects]
-#     return jsonify(all_subjects), 200
-    
-
-# @main.get('/curriculum/<int:id>/subject/<int:num>', strict_slashes=False)
-# def get_subject(id, num):
-#     curriculum = Curriculum.query.get(id)
-#     subjects = curriculum.subjects
-#     num = num - 1
-#     if subjects[num] is None:
-#         return jsonify({'error': 'Subject not found'}), 404
-#     return jsonify({'id': subjects[num].id, 
-#                     'name': subjects[num].name}), 200
-
 @app.get('/country/<int:id>/curriculum/<int:num>/subject/<int:var>/topics', strict_slashes=False)
 def get_topics(id, num, var):
     country = Country.query.get(id)
@@ -257,23 +222,9 @@ def get_topics(id, num, var):
             'topic': topic.name, 
             'content': topic.content}for topic in subject.topics]
             return jsonify(topics)
-    return {'error': 'Subject not specified'}, 400
-
-    # for curriculum in country.curriculums:
-    #     if curriculum.id == num and subject.curriculum_id == num:
-        
-    #     return jsonify({'error': 'Curriculum not specified'})
-    
-    #     if subject.curriculum_id != curriculum.id 
-    #     return jsonify({
-    #         'error': 'Subject not specified' 
-    #     }), 404
-    
-    # topics = Topic.query.filter_by(subject_id=num).all()
-    # topic_list = [{'id': topic.id, 'topic': topic.name, 'content': topic.content} for topic in topics]
-    # return jsonify(topic_list), 200
+    return {'error': 'Subject not specified'}, 404
 
 app.register_blueprint(main, url_prefix='/api')
 
-if __name__ == '__main__':
-    app.run()
+# if __name__ == '__main__':
+#     app.run()

@@ -1,8 +1,13 @@
 import  os
 from flask import Flask, Blueprint
+from flask_praetorian import Praetorian
+from flask_cors import CORS
 from .models import *
 
+
 main = Blueprint("main", __name__)
+cors = CORS()
+guard = Praetorian()
 
 @main.route('/')
 def index():
@@ -14,17 +19,24 @@ def create_app():
     app.debug = False
     basedir = os.path.abspath(os.path.dirname(__file__))
 
+    app.config['SECRET_KEY'] = 'secret'
+    app.config['JWT_ACCESS_LIFESPAN'] = {'hours': 24}
+    app.config['JWT_REFRESH_LIFESPAN'] = {'days': 30}
+
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'database.db')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SECRET_KEY'] = 'secret'
-    # app.config['JWT_ACCESS_LIFESPAN'] = {'hours': 24}
-    # app.config['JWT_REFRESH_LIFESPAN'] = {'days': 30}
 
     db.init_app(app)
-    
-    # migrate.init_app(app, db)
-    '''
+    cors.init_app(app)
+ 
+    # from .auth import auth as auth_blueprint
+    # app.register_blueprint(auth_blueprint)
+
+    # from .api import api as api_blueprint    
+    # app.register_blueprint(api_blueprint)
+
     with app.app_context():
+        guard.init_app(app, Student)
         db.create_all()
         r = Region('West-Africa') 
         r1 = Region('East-Africa')
@@ -64,16 +76,17 @@ large ammount of energy even by the energetic standards of radioactive decay. Nu
 fission was discovered on 19 December 1938 by German chemists Otto Han and Fitz Strassman\
 . Physiscists Lise Meitner and her nephew Otto Robert Frisch explained it theoritically in\
 January 1939. ')
-        r31 = Student('Isaac', 'Mititi', 'i.mititi@example.com', 'password', 1)
-        r32 = Student('Iniko', 'Ekeng', 'i.ekeng@example.com', 'password', 2)
-        r33 = Student('Titi', 'Shogbola', 'titi.shogbola@example.com', 'password', 3)
-        r34 = Student('Ekarika', 'Nsemeke', 'e.nsemeke@example.com', 'password', 4)
-        r35 = Student('David', 'Adeleke', 'd.adele@example.com', 'password', 5)
+        r31 = Student('Isaac', 'Mititi', 'i.mititi@example.com', guard.hash_password('password'), 1)
+        r32 = Student('Iniko', 'Ekeng', 'i.ekeng@example.com', guard.hash_password('password'), 2)
+        r33 = Student('Titi', 'Shogbola', 'titi.shogbola@example.com', guard.hash_password('password'), 3)
+        r34 = Student('Ekarika', 'Nsemeke', 'e.nsemeke@example.com', guard.hash_password('password'), 4)
+        r35 = Student('David', 'Adeleke', 'd.adele@example.com', guard.hash_password('password'), 5)
         
         db.session.add_all([r, r1, r2, r3, r4, r5, r6, r7, r8, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21,  r22, r23, r24, r25, r26, r27, r28, r29, r30, r31, r32, r33, r34, r35])
         db.session.commit()
         # db.session.add([r3, r4, r5, r6, r7]) # r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26, r27, r28, r29, r30, r31, r32, r33, r34, r35])
         # db.session.commit()'''
+
     return app
 
 curriculums = f'''

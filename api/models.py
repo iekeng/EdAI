@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+
 # from flask_migrate import Migrate
 
 db = SQLAlchemy()
@@ -104,3 +105,19 @@ class Student(db.Model):
 
     def __repr__(self):
         return '<Student {} {}>'.format(self.firstname, self.lastname)
+    
+    @property
+    def rolenames(self):
+       return 'Student'
+
+    @classmethod
+    def lookup(cls, email):
+        return cls.query.filter_by(email=email).one_or_none()
+
+    @classmethod
+    def identify(cls, id):
+        return cls.query.get(id)
+
+    @property
+    def identity(self):
+        return self.id
