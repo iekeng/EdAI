@@ -276,3 +276,163 @@
   justify-content: center;
   padding-top: 0px;
 }
+
+/* Media queries */
+@media screen and (max-width: 1200px) {
+  #Valp-Curr {
+    grid-template-columns: 100%;
+    height: auto;
+    margin-top: 30px;
+  }
+
+  #Valueproposition,
+  #Curriculum {
+    height: auto;
+  }
+
+  #Valp-h1,
+  #Valueproposition p,
+  #Curriculum h1 {
+    font-size: 24px;
+  }
+
+  .swipe-list {
+    width: 80%;
+  }
+
+  .how-it-works-text {
+    flex: 0 0 400px;
+  }
+
+  .testimonials,
+  .partners {
+    height: 100%;
+    background-position: center;
+  }
+
+  .testimonials h1,
+  .partners h1 {
+    margin-left: 10px;
+  }
+
+  .testimonials p,
+  .partners p {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #LP-Header {
+    margin-right: 10px;
+  }
+
+  #Valp-Curr {
+    grid-template-columns: 100%;
+    height: auto;
+    margin-top: 30px;
+  }
+
+  #Valueproposition,
+  #Curriculum {
+    height: auto;
+  }
+
+  #Valp-h1,
+  #Valueproposition p,
+  #Curriculum h1 {
+    font-size: 18px;
+  }
+
+  #LPbutton {
+    margin-top: 20px;
+  }
+
+  .swipe-list {
+    width: 90%;
+  }
+
+  .how-it-works-text {
+    flex: 0 0 300px;
+    margin: 10px;
+  }
+
+  .testimonials,
+  .partners {
+    height: 100%;
+    background-position: center;
+  }
+
+  .testimonials h1,
+  .partners h1 {
+    margin-left: 10px;
+  }
+
+  .testimonials p,
+  .partners p {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  #LPContainer {
+    width: 100%;
+  }
+
+  #LP-Header {
+    margin-right: 5px;
+  }
+
+  #Valp-Curr {
+    grid-template-columns: 100%;
+    height: auto;
+    margin-top: 20px;
+  }
+
+  #Valueproposition,
+  #Curriculum {
+    height: auto;
+  }
+
+  #Valp-h1,
+  #Valueproposition p,
+  #Curriculum h1 {
+    font-size: 16px;
+  }
+
+  #LPbutton {
+    margin-top: 20px;
+    padding: 6px 12px;
+  }
+
+  .swipe-list {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .how-it-works-text {
+    flex: 0 0 250px;
+    margin: 10px;
+  }
+
+  .testimonials,
+  .partners {
+    height: 100%;
+    background-position: center;
+  }
+
+  .testimonials h1,
+  .partners h1 {
+    margin-left: 10px;
+    font-size: 20px;
+  }
+
+  .testimonials p,
+  .partners p {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 14px;
+  }
+}

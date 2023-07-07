@@ -118,3 +118,36 @@ p {
 .LSbutton-group button:not(:last-child) {
   margin-right: 10px;
 }
+
+/* Media queries */
+@media screen and (max-width: 1200px) {
+  .loginSignUp {
+    margin-top: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .loginSignUp {
+    margin-top: 15%;
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .loginSignUp {
+    margin-top: 20%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .loginSignUp {
+    margin-top: 30%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+}
