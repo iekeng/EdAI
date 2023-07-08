@@ -19,7 +19,7 @@ const LandingPage = () => {
         <div style={{ marginRight: '10px' }}>
         <input 
           type="text"
-          value="Search..."
+          placeholder='Search...'
         />
         <button title="search button">
           Search
