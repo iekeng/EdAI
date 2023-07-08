@@ -26,7 +26,7 @@ const LandingPage = () => {
         </button>
       </div>
           <Link to="/LoginSignUp">
-            <button id="LPbutton" style={{backgroundColor: 'black'}}>Get Started</button>
+            <button id="LPbutton" style={{backgroundColor: 'black'}}>Log In/Sign Up</button>
           </Link>
         </div>
       </header>
