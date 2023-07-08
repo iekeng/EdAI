@@ -6,7 +6,7 @@ function CountrySelect({ onCountryChange, setGlobalCountryId }) {
     useEffect(() => {
       if (countryId) {
         // Make the POST request for the selected country
-        fetch('/api/post/country', {
+        fetch('http://18.210.33.70/post/country', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

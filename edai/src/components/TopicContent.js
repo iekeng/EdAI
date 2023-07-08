@@ -5,7 +5,7 @@ function TopicContent() {
   
   useEffect(() => {
   // Fetch the content from the API endpoint
-  fetch('api/edai/curriculum/school/subjects/topics/content')
+  fetch('http://18.210.33.70/curriculum/school/subjects/topics/content')
     .then(response => response.json())
     .then(data => setContent(data))
     .catch(error => console.error(error));

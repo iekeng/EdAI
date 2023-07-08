@@ -7,7 +7,7 @@ const CurriculumSelect = ({ selectedCountry, globalCountryId }) => {
     const fetchCurriculumData = async () => {
       try {
         // Make an API request to fetch the curriculum data for the selected country
-        const response = await fetch(`https://edai.com/api/country/${globalCountryId}/curriculums`);
+        const response = await fetch(`http://18.210.33.70/country/${globalCountryId}/curriculums`);
         const data = await response.json();
 
         // Set the curriculum state with the fetched data

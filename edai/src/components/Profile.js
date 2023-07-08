@@ -10,7 +10,7 @@ const Profile = () => {
       const fetchUserData = async () => {
         try {
           if (user && user.id) {
-            const response = await fetch(`/profile/${user.id}`);
+            const response = await fetch(`http://18.210.33.70/profile/${user.id}`);
             const data = await response.json();
             // Update the user context with the fetched user data
             //setUser(data);

@@ -8,7 +8,7 @@ const SubjectsDisplay = ({ globalCountryId, setSubjectId }) => {
         const fetchSubjectsData = async () => {
             try {
                 // Make an API request to fetch the subject data for the selected subject
-                const response = await fetch(`/api/curriculum/${globalCountryId}/subjects`);
+                const response = await fetch(`http://18.210.33.70/country/${globalCountryId}/curriculum/<int:num>/subject`);
                 const data = await response.json();
 
                 // Set the subject state with the fetched data

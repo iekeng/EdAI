@@ -29,7 +29,7 @@ const LoginSignupPage = () => {
 
   useEffect(() => {
     if (region) {
-      fetch('/api/region', {
+      fetch('http://18.210.33.70/api/region', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
