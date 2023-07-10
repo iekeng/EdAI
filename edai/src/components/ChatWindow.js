@@ -25,7 +25,7 @@ function ChatWindow() {
         setIsLoading(true);
   
         // Make the API request
-        const response = await fetch('/api/chatbot/<str:prompt>', {
+        const response = await fetch('http://18.210.33.70/chatbot/', {
           method: 'POST',
           body: JSON.stringify({ request: userInput }),
           headers: {

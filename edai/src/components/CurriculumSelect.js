@@ -1,32 +1,42 @@
 import React, { useState, useEffect } from 'react';
 
-const CurriculumSelect = ({ selectedCountry, globalCountryId }) => {
-  const [curriculum, setCurriculum] = useState('');
-  
+const CurriculumSelect = ({ selectedCountry, globalCountryId, onCurriculumChange }) => {
+  const [curriculums, setCurriculums] = useState([]);
+
   useEffect(() => {
-    const fetchCurriculumData = async () => {
+    const fetchCurriculumsData = async () => {
       try {
-        // Make an API request to fetch the curriculum data for the selected country
         const response = await fetch(`http://18.210.33.70/country/${globalCountryId}/curriculums`);
         const data = await response.json();
-
-        // Set the curriculum state with the fetched data
-        setCurriculum(data.curriculum);
+        setCurriculums(data);
+        console.log('curriculums data:', data);
       } catch (error) {
         console.error('Error fetching curriculum data:', error);
       }
     };
 
-    //Call the fetchCurriculumData function when the selectedCountry state changes
-    if (globalCountryId && globalCountryId !== "") {
-      console.log('fetch curriculum called')
-      fetchCurriculumData();
+    if (globalCountryId && globalCountryId !== '') {
+      console.log('fetch curriculum called');
+      fetchCurriculumsData();
     }
   }, [globalCountryId]);
 
+  const handleCurriculumChange = (event) => {
+    const selectedCurriculumId = event.target.value;
+    const selectedCurriculum = curriculums.find((curriculum) => curriculum.id === selectedCurriculumId);
+    onCurriculumChange(selectedCurriculum);
+  };
+
   return (
     <div>
-      <button>Curriculum: {curriculum}</button>
+      <select onChange={handleCurriculumChange}>
+        <option value="">Select Curriculum</option>
+        {curriculums.map((curriculum) => (
+          <option key={curriculum.id} value={curriculum.id}>
+            {curriculum.curriculum}
+          </option>
+        ))}
+      </select>
     </div>
   );
 };
