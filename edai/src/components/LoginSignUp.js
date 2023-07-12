@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 import edailogo from '../EdAI Logo.png';
 import '../LogInSignUp.css';
 
@@ -12,6 +12,8 @@ const LoginSignupPage = () => {
   const [regions, setRegions] = useState([]);
   const [loginError, setLoginError] = useState('');
   const [signupError, setSignupError] = useState('');
+  const [signupSuccess, setSignupSuccess] = useState(false);
+  const [passwordError, setPasswordError] = useState('');
 
   const navigate = useNavigate();
 
@@ -28,7 +30,14 @@ const LoginSignupPage = () => {
   };
 
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+    const passwordValue = e.target.value;
+    setPassword(passwordValue);
+  
+    if (!passwordRegex.test(passwordValue)) {
+      setPasswordError('Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter and one digit.');
+    } else {
+      setPasswordError('');
+    }
   };
 
   useEffect(() => {
@@ -63,7 +72,7 @@ const LoginSignupPage = () => {
 
     // Perform form validation
     if (!isLoginMode && (!name || !email || !password || !region)) {
-      // Handle validation error (e.g., display an error message)
+      // Handle validation error
       console.log('Please fill in all required fields.');
       return;
     }
@@ -112,7 +121,7 @@ const LoginSignupPage = () => {
           console.log('Signup response:', data);
           // Handle successful signup and navigate to the dashboard
           if (data.success) {
-            navigate('/Dashboard');
+            setSignupSuccess(true);
           } else {
             setSignupError('Signup failed. Please try again.');
           }
@@ -127,6 +136,8 @@ const LoginSignupPage = () => {
     setPassword('');
     setRegion('');
   };
+
+  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 
   return (
     <>
@@ -150,6 +161,7 @@ const LoginSignupPage = () => {
             <label className='input-label'>Password:</label>
             <input className='LSInput' id='pass-input' type="password" value={password} onChange={handlePasswordChange} required />
           </div>
+          {passwordError && <div className="error-message">{passwordError}</div>}
           {loginError && <div className="error-message">{loginError}</div>}
           {!isLoginMode && (
             <div>
@@ -165,6 +177,8 @@ const LoginSignupPage = () => {
           <button className='LSbutton' type='submit'>{isLoginMode ? 'Login' : 'SignUp'}</button>
         </form>
         {signupError && <div className="error-message">{signupError}</div>}
+
+        {signupSuccess && <redirect to="/Dashboard" />}
 
         <div>
           <p>
