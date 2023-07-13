@@ -84,13 +84,29 @@ label {
 }
 
 .LSbutton {
-  margin-top: 10px;
+
+  margin-top: 5px;
   padding: 8px 15px;
   background-color: #4285f4;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2px;
+}
+
+.button-logo {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
 }
 
 .LSbutton:hover {
@@ -98,7 +114,11 @@ label {
 }
 
 p {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+  margin-bottom: 2px;
 }
 
 .LSbutton.toggle-button {
@@ -119,35 +139,33 @@ p {
   margin-right: 10px;
 }
 
+
 /* Media queries */
+
 @media screen and (max-width: 1200px) {
   .loginSignUp {
-    margin-top: 10%;
-    margin-left: 20%;
-    margin-right: 20%;
+    margin: 10% auto;
+    max-width: 70%;
   }
 }
 
 @media screen and (max-width: 992px) {
   .loginSignUp {
-    margin-top: 15%;
-    margin-left: 15%;
-    margin-right: 15%;
+    margin: 15% auto;
+    max-width: 80%;
   }
 }
 
 @media screen and (max-width: 768px) {
   .loginSignUp {
-    margin-top: 20%;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin: 20% auto;
+    max-width: 90%;
   }
 }
 
 @media screen and (max-width: 576px) {
   .loginSignUp {
-    margin-top: 30%;
-    margin-left: 5%;
-    margin-right: 5%;
+    margin: 30% auto;
+    max-width: 95%;
   }
 }

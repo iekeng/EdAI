@@ -25,8 +25,11 @@ const LandingPage = () => {
           Search
         </button>
       </div>
-          <Link to="/LoginSignUp">
-            <button id="LPbutton" style={{backgroundColor: 'black'}}>Log In/Sign Up</button>
+          <Link to="/LogIn">
+            <button id="LPbutton" style={{backgroundColor: 'black'}}>Log In</button>
+          </Link>
+          <Link to="/SignUp">
+            <button id="LPbutton" style={{backgroundColor: 'black'}}>Register</button>
           </Link>
         </div>
       </header>
@@ -34,7 +37,7 @@ const LandingPage = () => {
           <aside id='Valueproposition'>
             <h1 id='Valp-h1'>Unlocking Knowledge, <br></br>Accessible to all!</h1>
             <p>EdAI addresses educational challenges faced by underserved students in Africa. Their AI-enabled learning platform offers comprehensive content, interactive tools, and personalized experiences to bridge the gap in affordable and quality education, empowering students for academic and personal growth.</p>
-            <Link to='/LoginSignUp' style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column-reverse', justifyContent: 'center', alignItems: 'center'}}><button id='LPbutton' style={{ backgroundColor: 'black' }}>Get Started</button></Link>
+            <Link to='/SignUp' style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column-reverse', justifyContent: 'center', alignItems: 'center'}}><button id='LPbutton' style={{ backgroundColor: 'black' }}>Get Started</button></Link>
           </aside>
           <aside id='Curriculum'>
             <h1>Curriculum Details</h1>
@@ -77,7 +80,7 @@ const LandingPage = () => {
           <img className="logo" src={Reactlogo} alt="React Logo" style={{ width: '20%', marginRight: '30px' }} />
         </div>
       </div>
-</section>
+        </section>
 
         <footer style={{display: 'flex', flexDirection: 'column-reverse', justifyContent: 'space-between', alignItems: 'center'}}>
           <ChatbotWindow />
