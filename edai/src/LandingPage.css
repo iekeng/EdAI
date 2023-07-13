@@ -358,7 +358,6 @@
 
   .testimonials,
   .partners {
-    height: 100%;
     background-position: center;
   }
 
@@ -432,6 +431,6 @@
   .partners p {
     margin-left: 10px;
     margin-right: 10px;
-    font-size: 14px;
+    font-size: 12px;
   }
 }
