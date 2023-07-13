@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useHistory, useNavigate } from 'react-router-dom';
 import edailogo from '../EdAI Logo.png';
 import '../LogInSignUp.css';
 
 const LoginSignupPage = () => {
+  // const history = useHistory();
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -14,6 +15,7 @@ const LoginSignupPage = () => {
   const [signupError, setSignupError] = useState('');
   const [signupSuccess, setSignupSuccess] = useState(false);
   const [passwordError, setPasswordError] = useState('');
+  const [passwordVerify, setPasswordVerify] = useState('');
 
   const navigate = useNavigate();
 
@@ -40,9 +42,13 @@ const LoginSignupPage = () => {
     }
   };
 
+  const handlePasswordVerifyChange = (e) => {
+    setPasswordVerify(e.target.value);
+  };
+
   useEffect(() => {
     // Fetch regions from the backend API
-    fetch('http://18.210.33.70/regions')
+    fetch('http://3.85.54.102/api/regions')
       .then(response => response.json())
       .then(data => {
         // Assuming the response contains an array of region objects [{ id, name }]
@@ -76,9 +82,13 @@ const LoginSignupPage = () => {
       console.log('Please fill in all required fields.');
       return;
     }
+    if (password !== passwordVerify) {
+      setSignupError('Passwords do not match. Please verify your password.');
+      return;
+    }
     if (isLoginMode) {
       console.log('Log in with your email:', email, 'and password:', password);
-      fetch('http://18.210.33.70/auth/login', {
+      fetch('http://3.85.54.102/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -106,9 +116,10 @@ const LoginSignupPage = () => {
         'Sign up with name:', name,
         'email:', email,
         'password:', password,
+        'passwordVerify:', passwordVerify,
         'and region:', region
       );
-      fetch('http://18.210.33.70/region/${region}', {
+      fetch('http://3.85.54.102/api/region/${region}', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -135,10 +146,13 @@ const LoginSignupPage = () => {
     setEmail('');
     setPassword('');
     setRegion('');
+    setPasswordVerify('');
   };
 
   const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
-
+  if (signupSuccess) {
+    navigate('/LoginSignUp');
+  }
   return (
     <>
       <div id='LS-Header'>
@@ -164,8 +178,13 @@ const LoginSignupPage = () => {
           {passwordError && <div className="error-message">{passwordError}</div>}
           {loginError && <div className="error-message">{loginError}</div>}
           {!isLoginMode && (
-            <div>
-              <label>Region:</label>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <label className='input-label'>Verify Password:</label>
+              <input className='LSInput' id='verify-pass-input' type="password" value={passwordVerify} onChange={handlePasswordVerifyChange} required />
+              <>
+              {signupError && <div className="error-message">{signupError}</div>}
+              </>
+              <label className='input-label'>Region:</label>
               <select id='region-input' value={region} onChange={handleRegionChange} required>
                 <option value="">Select a region</option>
                 {regions.map(region => (
@@ -176,9 +195,9 @@ const LoginSignupPage = () => {
           )}
           <button className='LSbutton' type='submit'>{isLoginMode ? 'Login' : 'SignUp'}</button>
         </form>
-        {signupError && <div className="error-message">{signupError}</div>}
+        
 
-        {signupSuccess && <redirect to="/Dashboard" />}
+        {/* {signupSuccess && <redirect to="/Dashboard" />} */}
 
         <div>
           <p>

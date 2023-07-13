@@ -28,7 +28,7 @@ function Dashboard() {
                 <SearchBar />
               </li>
               <li className="nav-item">
-                <CountrySelect setGlobalCountryId={setGlobalCountryId} />
+                <CountrySelect />
               </li>
               <li className="nav-item">
                 <LanguageSelect />
@@ -44,7 +44,7 @@ function Dashboard() {
             </ul>
             <ul id="header-nav-list2" className="header-nav-ul">
               <li className="nav-item">
-                <CurriculumSelect globalCountryId={globalCountryId} />
+                <CurriculumSelect />
               </li>
               <li className="nav-item">
                 <InterCurriculumButton />
@@ -65,12 +65,12 @@ function Dashboard() {
           <SchoolSection />
         </section>
         <section id="subjects1">
-          <SubjectsDisplay globalCountryId={globalCountryId} setSubjectId={setSubjectId} />
+          <SubjectsDisplay />
         </section>
       </section>
       <section id="study-window">
         <div id="topicslist">
-          <TopicDisplay globalCountryId={globalCountryId} subjectId={subjectId} />
+          <TopicDisplay />
         </div>
         <div id="contentdisplay">
           <ContentDisplay />

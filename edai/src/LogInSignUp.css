@@ -46,7 +46,7 @@ form {
 }
 
 label {
-  margin-bottom: 5px; 
+  margin-bottom: px; 
 }
 
 .input-label {
@@ -55,11 +55,11 @@ label {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 3px;
 }
 
 .LSInput {
-  padding: 8px;
+  padding: 5px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;

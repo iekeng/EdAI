@@ -6,7 +6,7 @@ const CurriculumSelect = ({ selectedCountry, globalCountryId, onCurriculumChange
   useEffect(() => {
     const fetchCurriculumsData = async () => {
       try {
-        const response = await fetch(`http://18.210.33.70/country/${globalCountryId}/curriculums`);
+        const response = await fetch(`/country/${globalCountryId}/curriculums`);
         const data = await response.json();
         setCurriculums(data);
         console.log('curriculums data:', data);
