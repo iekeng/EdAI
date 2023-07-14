@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import edailogo from '../EdAI Logo.png';
 import SchoolSection from './SchoolSection';
 import SubjectsDisplay from './SubjectsDisplay';
@@ -16,8 +16,8 @@ import AboutUsButton from './AboutUsButton';
 import Footer from './Footer';
 
 function Dashboard() {
-  const [globalCountryId, setGlobalCountryId] = useState(null)
-  const [subjectId, setSubjectId] = useState(null)
+  // const [globalCountryId, setGlobalCountryId] = useState(null)
+  // const [subjectId, setSubjectId] = useState(null)
   return (
     <> 
     <header>

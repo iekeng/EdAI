@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import edailogo from '../EdAI Logo.png';
 import googleLogo from '../google-logo.png';
 import facebookLogo from '../facebook-logo.png';
@@ -46,6 +47,10 @@ const LogInForm = () => {
       </div>
       <div className='loginSignUp'>
         <h1>Login</h1>
+        <p style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', fontSize: '12px' }}>
+            Need an account?
+              <Link to='/SignUp' style={{ color: 'blue', textDecoration: 'none', marginLeft: '5px' }}>SignUp</Link>
+        </p>
         <form onSubmit={handleSubmit}>
           <div>
             <label className='input-label'>Email:</label>
@@ -73,7 +78,7 @@ const LogInForm = () => {
           <button className='LSbutton' type='submit'>
             Login
           </button>
-          <p>Or sign in with:</p>
+          <p>Or continue with:</p>
           <div className='button-container'>
             <button className='LSbutton' onClick={() => console.log('Google authentication...')}>
               <img className='button-logo' src={googleLogo} alt='Google Logo' />

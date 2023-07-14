@@ -15,15 +15,12 @@ const SignUpForm = () => {
   const [signupSuccess, setSignupSuccess] = useState(false);
   const [regions, setRegions] = useState([]);
   const [selectedRegion, setSelectedRegion] = useState('');
-
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch regions from the backend API
     fetch('http://3.85.54.102/api/regions')
       .then(response => response.json())
       .then(data => {
-        // Assuming the response contains an array of region objects [{ id, name }]
         setRegions(data);
       })
       .catch(error => {
@@ -62,9 +59,7 @@ const SignUpForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Perform form validation
     if (!firstname || !lastname || !email || !password || !passwordVerify || !selectedRegion) {
-      // Handle validation error
       console.log('Please fill in all required fields.');
       return;
     }
@@ -82,35 +77,47 @@ const SignUpForm = () => {
       'and region:', selectedRegion
     );
 
-    fetch(`http://3.85.54.102/api/region/${selectedRegion}`, {
+    fetch('http://3.85.54.102/api/region/${selectedRegion}', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ firstname, lastname, email, password }),
+      body: JSON.stringify({ region: selectedRegion }),
     })
       .then(response => response.json())
-      .then(data => {
-        // Handle the response from the signup API call
-        console.log('Signup response:', data);
-        // Handle successful signup and navigate to the dashboard
-        if (data.success) {
-          navigate('/LogIn');
-        } else {
-          setSignupError('Signup failed. Please try again.');
-        }
+      .then(regionData => {
+        console.log('Region selection response:', regionData);
+        
+        // Make the profile details POST request
+        fetch('http://3.85.54.102/api/profile/${id}', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            firstname,
+            lastname,
+            email,
+            password,
+            region: regionData.id, // Assuming the response contains an ID for the selected region
+          }),
+        })
+          .then(response => response.json())
+          .then(profileData => {
+            console.log('Profile details response:', profileData);
+            
+            // Set signup success flag
+            setSignupSuccess(true);
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            setSignupError('Signup failed. Please try again.');
+          });
       })
       .catch(error => {
         console.error('Error:', error);
+        setSignupError('Signup failed. Please try again.');
       });
-
-    // Reset form inputs
-    setFirstName('');
-    setLastName('');
-    setEmail('');
-    setPassword('');
-    setPasswordVerify('');
-    setSelectedRegion('');
   };
 
   useEffect(() => {
@@ -175,7 +182,7 @@ const SignUpForm = () => {
               Already have an account?
               <button className='LSbutton' onClick={() => navigate('/LogIn')}>Login</button>
             </p>
-            <p>Or sign in with:</p>
+            <p>Or sign up with:</p>
             <div className='button-container'>
               <button className='LSbutton' onClick={() => console.log('Google authentication...')}>
                 <img className='button-logo' src={googleLogo} alt='Google Logo' />
