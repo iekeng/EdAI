@@ -352,21 +352,34 @@ vertical-align: middle;
 
 @media screen and (max-width: 992px) {
   header {
-    height: 80px;
+    height: auto;
+    width: 98.8%;
   }
 
   #logo {
-    height: 70px;
+    height: 60px;
   }
 
   #header-nav {
     height: 80px;
+    width: auto;
   }
 
   .nav-tem {
     font-size: 16px;
     padding: 8px 16px;
   }
+
+  .progress-chart {
+    
+    height: 20px;
+    
+}
+
+body {
+
+  width: 97.7%;
+}
 
   #curriculum_id {
     font-size: 8px;

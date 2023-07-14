@@ -8,7 +8,7 @@ function TopicDisplay({ subjectId, globalCountryId }) {
       const fetchTopicsData = async () => {
           try {
               // Make an API request to fetch the subject data for the selected subject
-              const response = await fetch(`http://18.210.33.70/country/1/curriculum/1/subject/4/topics`);
+              const response = await fetch(`http://3.85.54.102/api/country/1/curriculum/1/subject/4/topics`);
               const data = await response.json();
 
               // Set the subject state with the fetched data

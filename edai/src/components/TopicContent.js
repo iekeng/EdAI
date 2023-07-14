@@ -5,7 +5,7 @@ function TopicContent() {
   
   useEffect(() => {
   // Fetch the content from the API endpoint
-  fetch('http://18.210.33.70/country/1/curriculum/1/subject/4/topics')
+  fetch('http://3.85.54.102/api/country/1/curriculum/1/subject/4/topics')
     .then(response => response.json())
     .then(data => setContent(data))
     .catch(error => console.error(error));

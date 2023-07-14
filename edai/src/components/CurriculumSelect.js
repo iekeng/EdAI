@@ -1,22 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AppContext } from './AppContext';
 
-const CurriculumSelect = ({ selectedCountry, globalCountryId, onCurriculumChange }) => {
+const CurriculumSelect = ({ onCurriculumChange }) => {
   const [curriculums, setCurriculums] = useState([]);
+  const { globalCountryId } = useContext(AppContext);
 
   useEffect(() => {
     const fetchCurriculumsData = async () => {
       try {
-        const response = await fetch(`/country/${globalCountryId}/curriculums`);
+        const response = await fetch('http://3.85.54.102/api/curriculums');
         const data = await response.json();
-        setCurriculums(data);
-        console.log('curriculums data:', data);
+        const filteredCurriculums = data.filter(curriculum => curriculum.country === globalCountryId);
+        setCurriculums(filteredCurriculums);
+        console.log('curriculums data:', filteredCurriculums);
       } catch (error) {
         console.error('Error fetching curriculum data:', error);
       }
     };
 
     if (globalCountryId && globalCountryId !== '') {
-      console.log('fetch curriculum called');
       fetchCurriculumsData();
     }
   }, [globalCountryId]);

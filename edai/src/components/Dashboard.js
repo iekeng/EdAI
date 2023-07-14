@@ -14,6 +14,7 @@ import InterCurriculumButton from './InterCurriculumButton';
 import NewsButton from './NewsButton';
 import AboutUsButton from './AboutUsButton';
 import Footer from './Footer';
+import { AppProvider } from './AppContext';
 
 function Dashboard() {
   // const [globalCountryId, setGlobalCountryId] = useState(null)
@@ -28,7 +29,9 @@ function Dashboard() {
                 <SearchBar />
               </li>
               <li className="nav-item">
-                <CountrySelect />
+                <AppProvider>
+                  <CountrySelect />
+                </AppProvider>
               </li>
               <li className="nav-item">
                 <LanguageSelect />
@@ -44,7 +47,9 @@ function Dashboard() {
             </ul>
             <ul id="header-nav-list2" className="header-nav-ul">
               <li className="nav-item">
+              <AppProvider>
                 <CurriculumSelect />
+                </AppProvider>
               </li>
               <li className="nav-item">
                 <InterCurriculumButton />
