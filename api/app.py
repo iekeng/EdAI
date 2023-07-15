@@ -31,11 +31,22 @@ def protected():
     return f'protected endpoint (allowed user {current_user().email})'
 
 @main.post('/chatbot', strict_slashes=False)
+@auth_required
 def chatbot(model="gpt-3.5-turbo"):
+    email = current_user().email
+    student = Student.query.filter_by(email=email).first()
+    student_id = student.id
+
     messages = [
         {"role": "system", "content": system_message}
     ]
     prompt = request.json['prompt']
+
+    message_prompt = Message(prompt, student_id)
+
+    # db.session.add(message_prompt)
+    # db.session.commit()
+
     new_message = {"role": "user", "content": prompt}
     messages.append(new_message)
 
@@ -45,7 +56,24 @@ def chatbot(model="gpt-3.5-turbo"):
         temperature=0.2,
     )
     result = response.choices[0].message["content"]
+
+    message_result = Message(result, student_id)
+
+    db.session.add_all([message_prompt, message_result])
+    db.session.commit()
+    
     return jsonify({"message": result})
+
+@main.get('/chats', strict_slashes=False)
+@auth_required
+def get_messages():
+    email = current_user().email
+    student = Student.query.filter_by(email=email).first()
+    student_id = student.id
+    messages = Message.query.filter_by(student_id=student_id).all()
+    result = [(message.value) for message in messages]
+    return jsonify({'messages': result})
+
 
 @main.route('/regions', strict_slashes=False)
 def get_regions():
@@ -115,22 +143,8 @@ def get_students_profile():
                'curriculum': curriculum.name})
     return jsonify(result), 200
 
-@main.route('/profile/<int:id>', strict_slashes=False, methods=['GET', 'POST'])
+@main.get('/profile/<int:id>', strict_slashes=False)
 def student_profile(id):
-    if request.method == 'POST':
-        firstname = request.json["firstname"]
-        lastname = request.json["lastname"]
-        email = request.json["email"]
-        password = request.json["password"]
-
-        new_user = Student(firstname, 
-                        lastname, 
-                        email, password)
-
-        db.session.add(new_user)
-        db.session.commit()
-        return jsonify({new_user.firstname, new_user.lastname, new_user.email}), 200
-    
     student = Student.query.get(id)
     if student is None:
         return jsonify({'error': 'Student not found'}), 404
@@ -142,7 +156,27 @@ def student_profile(id):
                     'email': student.email,
                     'curriculum': curriculum.name,
                     'country': country.name}), 200
-#
+
+@main.post('/post/profile')
+def new_student():
+    firstname = request.json["firstname"]
+    lastname = request.json["lastname"]
+    email = request.json["email"]
+    password = request.json["password"]
+    region_id = request.json["region_id"]
+
+    new_student = Student(firstname, 
+                    lastname, 
+                    email, guard.hash_password(password), region_id)
+
+    db.session.add(new_student)
+    db.session.commit()
+
+    return jsonify({'firstname': new_student.firstname, 
+                    'lastname': new_student.lastname, 
+                    'email': new_student.email, 
+                    'region_id': new_student.region_id}), 200
+
 @main.put('/profile/edit/<int:id>', strict_slashes=False)
 def post_student(id):
     try:

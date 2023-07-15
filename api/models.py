@@ -95,6 +95,7 @@ class Student(db.Model):
     password = db.Column(db.String(45), nullable=False)
     # region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
     curriculum_id = db.Column(db.Integer, db.ForeignKey('curriculum.id'))
+    messages = db.relationship('Message', backref='student')
 
     def __init__(self, firstname, lastname, email, password, curriculum_id):
         self.firstname = firstname
@@ -121,3 +122,15 @@ class Student(db.Model):
     @property
     def identity(self):
         return self.id
+
+class Message(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    value = db.Column(db.Text)
+    student_id = db.Column(db.Integer, db.ForeignKey('student.id'))
+
+    def __init__(self, value, student_id):
+        self.value = value
+        self.student_id = student_id
+
+    def __repr__(self):
+        return '<Message: ()>'.format(self.value)

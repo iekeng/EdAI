@@ -23,6 +23,7 @@ def create_app():
     app.config['JWT_ACCESS_LIFESPAN'] = {'hours': 24}
     app.config['JWT_REFRESH_LIFESPAN'] = {'days': 30}
 
+
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'database.db')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -35,9 +36,9 @@ def create_app():
     # from .api import api as api_blueprint    
     # app.register_blueprint(api_blueprint)
 
-    '''with app.app_context():
+    with app.app_context():
         guard.init_app(app, Student)
-        db.create_all()
+        '''db.create_all()
         r = Region('West-Africa') 
         r1 = Region('East-Africa')
         r2 = Region('Central-Africa')
@@ -81,8 +82,10 @@ January 1939. ')
         r33 = Student('Titi', 'Shogbola', 'titi.shogbola@example.com', guard.hash_password('password'), 3)
         r34 = Student('Ekarika', 'Nsemeke', 'e.nsemeke@example.com', guard.hash_password('password'), 4)
         r35 = Student('David', 'Adeleke', 'd.adele@example.com', guard.hash_password('password'), 5)
+        r36 = Message('Hi, I am Isaac', 1)
+        r37 = Message('Hello Isaac', 1)
         
-        db.session.add_all([r, r1, r2, r3, r4, r5, r6, r7, r8, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21,  r22, r23, r24, r25, r26, r27, r28, r29, r30, r31, r32, r33, r34, r35])
+        db.session.add_all([r, r1, r2, r3, r4, r5, r6, r7, r8, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21,  r22, r23, r24, r25, r26, r27, r28, r29, r30, r31, r32, r33, r34, r35, r36, r37])
         db.session.commit()
         # db.session.add([r3, r4, r5, r6, r7]) # r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26, r27, r28, r29, r30, r31, r32, r33, r34, r35])
         # db.session.commit()'''
