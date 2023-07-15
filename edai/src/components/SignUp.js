@@ -13,20 +13,34 @@ const SignUpForm = () => {
   const [passwordVerify, setPasswordVerify] = useState('');
   const [signupError, setSignupError] = useState('');
   const [signupSuccess, setSignupSuccess] = useState(false);
-  const [regions, setRegions] = useState([]);
-  const [selectedRegion, setSelectedRegion] = useState('');
+  const [countries, setCountries] = useState([]);
+  const [curriculums, setCurriculums] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState('');
+  const [selectedCurriculum, setSelectedCurriculum] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://3.85.54.102/api/regions')
+    fetch('http://3.85.54.102/api/countries')
       .then(response => response.json())
       .then(data => {
-        setRegions(data);
+        setCountries(data);
       })
       .catch(error => {
         console.error('Error:', error);
       });
   }, []);
+
+  const fetchCurriculumsByCountry = (countryId) => {
+    fetch(`http://3.85.54.102/api/country/${countryId}/curriculums`)
+      .then(response => response.json())
+      .then(data => {
+        // Assuming the response contains an array of curriculums
+        setCurriculums(data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  };
 
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);
@@ -48,8 +62,18 @@ const SignUpForm = () => {
     setPasswordVerify(e.target.value);
   };
 
-  const handleRegionChange = (e) => {
-    setSelectedRegion(e.target.value);
+  const handleCountryChange = (e) => {
+    const selectedCountryId = e.target.value;
+    setSelectedCountry(selectedCountryId);
+
+  if (selectedCountryId) {
+    fetchCurriculumsByCountry(selectedCountryId);
+  }
+};
+
+  const handleCurriculumChange = (e) => {
+    const selectedCurriculumId = e.target.value;
+    setSelectedCurriculum(selectedCurriculumId);
   };
 
   const handleSignupSuccess = () => {
@@ -59,8 +83,8 @@ const SignUpForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!firstname || !lastname || !email || !password || !passwordVerify || !selectedRegion) {
-      console.log('Please fill in all required fields.');
+    if (!firstname || !lastname || !email || !password || !passwordVerify || !selectedCountry || !selectedCurriculum) {
+      setSignupError('Please fill in all required fields.');
       return;
     }
     if (password !== passwordVerify) {
@@ -74,45 +98,31 @@ const SignUpForm = () => {
       'email:', email,
       'password:', password,
       'passwordVerify:', passwordVerify,
-      'and region:', selectedRegion
+      'and country:', selectedCountry,
+      'and curriculum:', selectedCurriculum
     );
 
-    fetch('http://3.85.54.102/api/region/${selectedRegion}', {
+    // Make the profile details POST request
+    fetch('http://3.85.54.102/api/post/profile', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ region: selectedRegion }),
+      body: JSON.stringify({
+        firstname,
+        lastname,
+        email,
+        password,
+        country: selectedCountry,
+        curriculum: selectedCurriculum,
+      }),
     })
       .then(response => response.json())
-      .then(regionData => {
-        console.log('Region selection response:', regionData);
-        
-        // Make the profile details POST request
-        fetch('http://3.85.54.102/api/profile/${id}', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            firstname,
-            lastname,
-            email,
-            password,
-            region: regionData.id, // Assuming the response contains an ID for the selected region
-          }),
-        })
-          .then(response => response.json())
-          .then(profileData => {
-            console.log('Profile details response:', profileData);
-            
-            // Set signup success flag
-            setSignupSuccess(true);
-          })
-          .catch(error => {
-            console.error('Error:', error);
-            setSignupError('Signup failed. Please try again.');
-          });
+      .then(profileData => {
+        console.log('Profile details response:', profileData);
+
+        // Set signup success flag
+        setSignupSuccess(true);
       })
       .catch(error => {
         console.error('Error:', error);
@@ -164,11 +174,20 @@ const SignUpForm = () => {
             </div>
             {signupError && <div className="error-message" style={{ color: 'red', fontStyle: 'italic' }}>{signupError}</div>}
             <div>
-              <label className='input-label'>Region:</label>
-              <select id='region-input' value={selectedRegion} onChange={handleRegionChange} required>
-                <option value="">Select a region</option>
-                {regions.map(region => (
-                  <option key={region.id} value={region.id}>{region.name}</option>
+              <label className='input-label'>Country:</label>
+              <select id='country-input' value={selectedCountry} onChange={handleCountryChange} required>
+                <option value="">Select country</option>
+                {countries.map(country => (
+                  <option key={country.id} value={country.id}>{country.name}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className='input-label'>Curriculum:</label>
+              <select id='curriculum-input' value={selectedCurriculum} onChange={handleCurriculumChange} required>
+                <option value="">Select curriculum</option>
+                {curriculums.map(curriculum => (
+                  <option key={curriculum.id} value={curriculum.id}>{curriculum.curriculum}</option>
                 ))}
               </select>
             </div>
