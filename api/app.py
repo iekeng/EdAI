@@ -163,11 +163,9 @@ def new_student():
     lastname = request.json["lastname"]
     email = request.json["email"]
     password = request.json["password"]
-    region_id = request.json["region_id"]
+    curriculum_id = request.json["curriculum_id"]
 
-    new_student = Student(firstname, 
-                    lastname, 
-                    email, guard.hash_password(password), region_id)
+    new_student = Student(firstname, lastname, email, guard.hash_password(password), curriculum_id)
 
     db.session.add(new_student)
     db.session.commit()
@@ -175,7 +173,7 @@ def new_student():
     return jsonify({'firstname': new_student.firstname, 
                     'lastname': new_student.lastname, 
                     'email': new_student.email, 
-                    'region_id': new_student.region_id}), 200
+                    'region_id': new_student.curriculum_id}), 200
 
 @main.put('/profile/edit/<int:id>', strict_slashes=False)
 def post_student(id):
