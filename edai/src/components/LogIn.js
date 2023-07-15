@@ -78,7 +78,7 @@ const LogInForm = () => {
             />
           </div>
           {loginError && <div style={{ color: 'red', fontSize: '13px', fontStyle: 'italic'}} className="error-message">{loginError}</div>}
-          <button className="LSbutton" type="submit" onClick={() => navigate('/Dashboard')}>
+          <button className="LSbutton" type="submit" >
             Login
           </button>
           <p>Or continue with:</p>

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import edailogo from '../EdAI Logo.png';
 import googleLogo from '../google-logo.png';
 import facebookLogo from '../facebook-logo.png';
 import '../LogInSignUp.css';
+import { AppContext } from './AppContext';
 
 const SignUpForm = () => {
   const [firstname, setFirstName] = useState('');
@@ -17,6 +18,7 @@ const SignUpForm = () => {
   const [curriculums, setCurriculums] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState('');
   const [selectedCurriculum, setSelectedCurriculum] = useState('');
+  const { setGlobalCountryId } = useContext(AppContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -66,10 +68,10 @@ const SignUpForm = () => {
     const selectedCountryId = e.target.value;
     setSelectedCountry(selectedCountryId);
 
-  if (selectedCountryId) {
-    fetchCurriculumsByCountry(selectedCountryId);
-  }
-};
+    if (selectedCountryId) {
+      fetchCurriculumsByCountry(selectedCountryId);
+    }
+  };
 
   const handleCurriculumChange = (e) => {
     const selectedCurriculumId = e.target.value;
@@ -92,6 +94,9 @@ const SignUpForm = () => {
       return;
     }
 
+    // Set the selected country ID to the global context
+    setGlobalCountryId(selectedCountry);
+
     console.log(
       'Sign up with first name:', firstname,
       'last name:', lastname,
@@ -113,8 +118,7 @@ const SignUpForm = () => {
         lastname,
         email,
         password,
-        country: selectedCountry,
-        curriculum: selectedCurriculum,
+        curriculum_id: selectedCurriculum,
       }),
     })
       .then(response => response.json())

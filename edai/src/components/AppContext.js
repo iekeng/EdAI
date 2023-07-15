@@ -1,8 +1,8 @@
 import { createContext, useState } from 'react';
 
-export const AppContext = createContext();
+const AppContext = createContext();
 
-export const AppProvider = ({ children }) => {
+const AppProvider = ({ children }) => {
   const [globalCountryId, setGlobalCountryId] = useState('');
 
   return (
@@ -11,3 +11,5 @@ export const AppProvider = ({ children }) => {
     </AppContext.Provider>
   );
 };
+
+export { AppContext, AppProvider };
