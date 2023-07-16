@@ -4,7 +4,7 @@ from flask_praetorian import auth_required, current_user
 from dotenv import load_dotenv, find_dotenv
 from . import *
 
-load_dotenv(find_dotenv())
+load_dotenv(find_dotenv()) 
 
 app = create_app()
 
@@ -126,6 +126,48 @@ def get_country(id):
         return jsonify({'error': 'Country not found'}), 404
     return jsonify({'id': country.id, 'name': country.name}), 200
 
+@main.get('user/country', strict_slashes=False)
+@auth_required
+def get_user_country():
+    email = current_user().email
+    student = Student.query.filter_by(email=email).first()
+    curriculum_id = student.curriculum_id
+    curriculum = Curriculum.query.get(curriculum_id)
+    country_id = curriculum.country_id
+    country = Country.query.get(country_id)
+
+    return jsonify({'country': country.name}), 200
+
+@main.get('user/curriculum', strict_slashes=False)
+@auth_required
+def get_user_curriculum():
+    email = current_user().email
+    student = Student.query.filter_by(email=email).first()
+    curriculum_id = student.curriculum_id
+    curriculum = Curriculum.query.get(curriculum_id)
+
+    return jsonify({'curriculum': curriculum.name}), 200
+
+@main.get('user/profile', strict_slashes=False)
+@auth_required
+def get_user_profile():
+    email = current_user().email
+    student = Student.query.filter_by(email=email).first()
+
+    return jsonify({'firstname': student.firstname, 'lastname': student.lastname}), 200
+
+@main.get('user/subjects', strict_slashes=False)
+@auth_required
+def get_user_subjects():
+    email = current_user().email
+    student = Student.query.filter_by(email=email).first()
+    curriculum_id = student.curriculum_id
+    subjects = Subject.query.filter_by(curriculum_id=curriculum_id).all()
+    
+    result = [{'subject': subject.name} for subject in subjects]
+
+    return jsonify(result)
+
 @main.route('/profiles', strict_slashes=False)
 def get_students_profile():
     students = Student.query.all()
@@ -173,7 +215,7 @@ def new_student():
     return jsonify({'firstname': new_student.firstname, 
                     'lastname': new_student.lastname, 
                     'email': new_student.email, 
-                    'region_id': new_student.curriculum_id}), 200
+                    'curriculum_id': new_student.curriculum_id}), 200
 
 @main.put('/profile/edit/<int:id>', strict_slashes=False)
 def post_student(id):
