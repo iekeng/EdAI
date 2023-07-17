@@ -1,52 +1,53 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../UserContext';
+import React, { useState, useEffect } from 'react';
 
-const Profile = () => {
-  const { user, isLoggedIn } = useContext(UserContext);
-  const [isLoading, setIsLoading] = useState(true);
-  const [studentData, setStudentData] = useState(null);
+function ProfileDisplay() {
+  const [userProfile, setUserProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        if (user && user.id) {
-          const response = await fetch(`http://18.210.33.70/profile/${user.id}`);
-          if (!response.ok) {
-            throw new Error('Error fetching user data');
-          }
-          const data = await response.json();
-          setStudentData(data);
-        }
-      } catch (error) {
-        console.log('Error fetching user data:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+    fetchUserProfile();
+  }, []);
 
-    if (isLoggedIn) {
-      fetchUserData();
+  const fetchUserProfile = async () => {
+    try {
+      const access_token = localStorage.getItem('access_token');
+      if (access_token) {
+        const response = await fetch('http://3.85.54.102/api/user/profile', {
+          headers: {
+            'Authorization': `Bearer ${access_token}`,
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          const { firstname, lastname } = data;
+          setUserProfile({ firstname, lastname });
+          setLoading(false);
+        } else {
+          setLoading(false);
+        }
+      } else {
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+      setLoading(false);
     }
-  }, [isLoggedIn, user]);
+  };
 
   return (
-    <nav>
-      {isLoading ? (
-        <span>Loading...</span>
-      ) : isLoggedIn && studentData ? (
-        <>
-          <span>Welcome, {studentData.firstname} {studentData.lastname}!</span>
-          <img src={studentData.avatar} alt="Profile Avatar" />
-          <progress value={studentData.progress} max="100" />
-          <p>Email: {studentData.email}</p>
-          <p>Curriculum: {studentData.curriculum}</p>
-          <p>Country: {studentData.country}</p>
-        </>
+    <div style={{paddingBottom: '0px'}}>
+      {loading ? (
+        <h2 style={{ fontSize: '13px' }}>Loading...</h2>
+      ) : userProfile ? (
+        <div>
+          <h2 style={{ fontSize: '14px' }}> {userProfile.firstname} {userProfile.lastname}</h2>
+        </div>
       ) : (
-        <span>Please log in to view your profile.</span>
+        <h2 style={{ fontSize: '14px' }}>No profile data available.</h2>
       )}
-    </nav>
+    </div>
   );
-};
+}
 
-export default Profile;
+export default ProfileDisplay;

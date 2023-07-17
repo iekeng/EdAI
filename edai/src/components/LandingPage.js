@@ -5,8 +5,8 @@ import '../LandingPage.css'
 import SwipeableList from './SwipeableList'
 import Openailogo from '../Openai_logo.png'
 import Reactlogo from '../React_logo.png'
+import AISupportImage from '../AI Support Screenshot.jpg'
 import awslogo from '../aws_logo.png'
-import ChatbotWindow from './ChatWindow'
 
 const LandingPage = () => {
   const emailAddress = "info@edai.tech";
@@ -61,7 +61,11 @@ const LandingPage = () => {
               </div>
               <div className="how-it-works-text">
                 <h2>4. Need Assistance?</h2>
-                <p>Type your question on our chatbot section on your bottom right, or press and hold the mic button to speak to our AI support.</p>
+                <p>Type your question on our chatbot section on your bottom right and press the Send button to experience our AI support.</p>
+              </div>
+              <div className="how-it-works-text" >
+              <h2>AI Support In Action</h2>
+                <img src={AISupportImage} alt='AI Support Screenshot' />
               </div>
             </div>
           </section>
@@ -81,9 +85,7 @@ const LandingPage = () => {
         </div>
       </div>
         </section>
-
         <footer style={{display: 'flex', flexDirection: 'column-reverse', justifyContent: 'space-between', alignItems: 'center'}}>
-          <ChatbotWindow />
           <p style={{display: 'inline-block', fontWeight: 'bold'}}>Copyright &copy; 2023</p>
           <p style={{ fontWeight: 'bold'}}>Contact Us: <a href={`mailto:${emailAddress}`}>{emailAddress}</a></p>
         </footer>

@@ -1,46 +1,50 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { AppContext } from './AppContext';
+import React, { useState, useEffect } from 'react';
 
-const CurriculumSelect = () => {
-  const [curriculums, setCurriculums] = useState([]);
-  const { globalCountryId } = useContext(AppContext);
+function CurriculumSelect() {
+  const [userCurriculum, setUserCurriculum] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchCurriculumsData = async () => {
-      try {
-        const response = await fetch(`http://3.85.54.102/api/country/${globalCountryId}/curriculums`);
-        const data = await response.json();
-        setCurriculums(data);
-        console.log('curriculums data:', data);
-      } catch (error) {
-        console.error('Error fetching curriculum data:', error);
+    fetchUserCurriculum();
+  }, []);
+
+  const fetchUserCurriculum = async () => {
+    try {
+      const access_token = localStorage.getItem('access_token');
+
+      if (access_token) {
+        const response = await fetch('http://3.85.54.102/api/user/curriculum', {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          const curriculumName = data.curriculum;
+          setUserCurriculum(curriculumName);
+          setLoading(false);
+        } else {
+          setLoading(false);
+        }
       }
-    };
-
-    if (globalCountryId && globalCountryId !== '') {
-      fetchCurriculumsData();
+    } catch (error) {
+      console.error('Error fetching user curriculum:', error);
+      setLoading(false);
     }
-  }, [globalCountryId]);
-
-  const handleCurriculumChange = (event) => {
-    // const selectedCurriculumId = event.target.value;
-    // const selectedCurriculum = curriculums.find((curriculum) => curriculum.id === selectedCurriculumId);
-    // onCurriculumChange(selectedCurriculum);
-    console.log('globalCountryId: ', globalCountryId);
   };
 
   return (
-    <div>
-      <select onClick={handleCurriculumChange}>
-        <option value="">Select Curriculum</option>
-        {curriculums.map((curriculum) => (
-          <option key={curriculum.id} value={curriculum.id}>
-            {curriculum.curriculum}
-          </option>
-        ))}
-      </select>
+    <div style={{ paddingTop: '0px' }}>
+      {loading ? (
+        <h2 style={{ fontSize: '13px' }}>Loading...</h2>
+      ) : userCurriculum ? (
+        <h2 style={{ fontSize: '14px' }}>Curriculum: {userCurriculum}</h2>
+      ) : (
+        <h2 style={{ fontSize: '14px' }}>No curriculum selected.</h2>
+      )}
     </div>
   );
-};
+}
 
 export default CurriculumSelect;

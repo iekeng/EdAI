@@ -2,7 +2,7 @@ import React from 'react';
 import edailogo from '../EdAI Logo.png';
 import SchoolSection from './SchoolSection';
 import SubjectsDisplay from './SubjectsDisplay';
-import TopicDisplay from './TopicDisplay';
+import TopicsDisplay from './TopicsDisplay';
 import ContentDisplay from './ContentDisplay';
 import ChatWindow from './ChatWindow';
 import SearchBar from './SearchBar';
@@ -15,54 +15,64 @@ import NewsButton from './NewsButton';
 import AboutUsButton from './AboutUsButton';
 import Footer from './Footer';
 import { AppProvider } from './AppContext';
+import { AccessTokenProvider } from './AccessTokenContext';
+import { Link } from 'react-router-dom';
 
 function Dashboard() {
   // const [globalCountryId, setGlobalCountryId] = useState(null)
   // const [subjectId, setSubjectId] = useState(null)
   return (
-    <> 
-    <header>
-          <img id="logo" src={edailogo} alt="Logo" />
-          <nav id="header-nav">
-            <ul id="header-nav-list1" className="header-nav-ul">
-              <li className="nav-item" id="searchbutton">
-                <SearchBar />
-              </li>
-              <li className="nav-item">
-                <AppProvider>
-                  <CountrySelect />
-                </AppProvider>
-              </li>
-              <li className="nav-item">
-                <LanguageSelect />
-              </li>
-            </ul>
-            <ul className="header-nav-ul">
-              <li>
-                <Profile />
-              </li>
-              <li className="progress-chart">
-                <div className="progress-bar"></div>
-              </li>
-            </ul>
-            <ul id="header-nav-list2" className="header-nav-ul">
-              <li className="nav-item">
-              <AppProvider>
-                <CurriculumSelect />
-                </AppProvider>
-              </li>
-              <li className="nav-item">
-                <InterCurriculumButton />
-              </li>
-              <li className="nav-item">
-                <NewsButton />
-              </li>
-              <li className="nav-item">
-                <AboutUsButton />
-              </li>
-            </ul>
-          </nav>
-        </header>
+    <AccessTokenProvider> 
+   <header>
+  <Link to='/'>
+    <img id="logo" src={edailogo} alt="Logo" />
+  </Link>
+  <nav id="header-nav">
+    <div className="nav-line">
+      <ul id="header-nav-list1" className="header-nav-ul">
+        <li className="nav-item" id="searchbutton">
+          <SearchBar />
+        </li>
+        <li className="nav-item">
+          <AppProvider>
+            <CountrySelect />
+          </AppProvider>
+        </li>
+        <li className="nav-item">
+          <LanguageSelect />
+        </li>
+      </ul>
+    </div>
+    <div className="nav-line">
+      <ul className="header-nav-ul">
+        <li>
+          <Profile />
+        </li>
+        <li className="progress-chart">
+          <div className="progress-bar"></div>
+        </li>
+      </ul>
+    </div>
+    <div className="nav-line">
+      <ul id="header-nav-list2" className="header-nav-ul">
+        <li className="nav-item">
+          <AppProvider>
+            <CurriculumSelect />
+          </AppProvider>
+        </li>
+        <li className="nav-item">
+          <InterCurriculumButton />
+        </li>
+        <li className="nav-item">
+          <NewsButton />
+        </li>
+        <li className="nav-item">
+          <AboutUsButton />
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
     <div id='dashboard-container'>
       <section id="school-topic-window">
         <section id="school">
@@ -75,7 +85,7 @@ function Dashboard() {
       </section>
       <section id="study-window">
         <div id="topicslist">
-          <TopicDisplay />
+          <TopicsDisplay />
         </div>
         <div id="contentdisplay">
           <ContentDisplay />
@@ -86,7 +96,7 @@ function Dashboard() {
         <Footer />
       </section>
     </div>
-    </>
+    </AccessTokenProvider>
   );
 }
 

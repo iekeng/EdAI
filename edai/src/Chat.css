@@ -192,3 +192,57 @@ a {
       width: 300px;
       height: 50px;
     }
+
+    /* Small mobile phones */
+@media screen and (max-width: 320px) {
+  .chatBox {
+    width: 100%;
+    height: 300px;
+    margin: 10px;
+  }
+}
+
+/* Mobile phones in portrait mode */
+@media screen and (min-width: 321px) and (max-width: 480px) {
+  .chatBox {
+    width: 90%;
+    height: 350px;
+    margin: 20px;
+  }
+}
+
+/* Mobile phones in landscape mode and small tablets */
+@media screen and (min-width: 481px) and (max-width: 767px) {
+  .chatBox {
+    width: 80%;
+    height: 400px;
+    margin: 30px;
+  }
+}
+
+/* Tablets and small laptops */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .chatBox {
+    width: 600px;
+    height: 400px;
+    margin: 40px auto;
+  }
+}
+
+/* Tablets and laptops in landscape mode */
+@media screen and (min-width: 1024px) and (max-width: 1365px) {
+  .chatBox {
+    width: 800px;
+    height: 500px;
+    margin: 50px auto;
+  }
+}
+
+/* Larger desktops and high-resolution screens */
+@media screen and (min-width: 1920px) {
+  .chatBox {
+    width: 1000px;
+    height: 700px;
+    margin: 70px auto;
+  }
+}
