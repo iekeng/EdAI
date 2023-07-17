@@ -164,7 +164,25 @@ def get_user_subjects():
     curriculum_id = student.curriculum_id
     subjects = Subject.query.filter_by(curriculum_id=curriculum_id).all()
     
-    result = [{'subject': subject.name} for subject in subjects]
+    result = [{'subject': subject.name, 'id': subject.id} for subject in subjects]
+
+    return jsonify(result)
+
+@main.get('/subject/<int:id>/topics', strict_slashes=False)
+@auth_required
+def get_user_topics(id):
+    subject = Subject.query.get(id)
+    subject_id = subject.id
+    topics = Topic.query.filter_by(subject_id=subject_id).all()
+    result = [{'topic': topic.name, 'id': topic.id} for topic in topics]
+
+    return jsonify(result)
+
+@main.get('/topic/<int:id>/content', strict_slashes=False)
+@auth_required
+def get_user_content(id):
+    topic = Topic.query.get(id)
+    result = {'content': topic.content} 
 
     return jsonify(result)
 
@@ -299,6 +317,3 @@ def get_topics(id, num, var):
     return {'error': 'Subject not specified'}, 404
 
 app.register_blueprint(main, url_prefix='/api')
-
-# if __name__ == '__main__':
-#     app.run()
