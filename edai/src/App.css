@@ -210,9 +210,9 @@ header {
 
 #subjects-li a:hover {
 
-  background-color: white;
+  /* background-color: white;
   color: white;
-  box-shadow: 5px 5px 5px black;
+  box-shadow: 5px 5px 5px black; */
 }
 
 #study-window {
