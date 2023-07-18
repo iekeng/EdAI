@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import TopicsDisplay from './TopicsDisplay';
+import { SubjectContext } from './SubjectContext';
 
 function SubjectsDisplay() {
   const [subjects, setSubjects] = useState([]);
-  const [selectedSubjectId, setSelectedSubjectId] = useState(0);
+  const { setSelectedSubjectId } = useContext(SubjectContext);
 
   useEffect(() => {
     // Fetch user subjects when the component mounts
@@ -48,9 +49,9 @@ function SubjectsDisplay() {
     }
   };
 
-  const handleSubjectClick = (subjectId) => {
-    setSelectedSubjectId(subjectId);
-    console.log('SubjectId:', subjectId);
+   const handleSubjectClick = (subjectId) => {
+    setSelectedSubjectId(subjectId); // Update the selectedSubjectId when subject is clicked
+    console.log('Selected Subject ID:', subjectId);
   };
 
   const handleMouseEnter = (event) => {
@@ -82,10 +83,8 @@ function SubjectsDisplay() {
         </li>
       ))}
     </ul>
-    {selectedSubjectId && <TopicsDisplay selectedSubjectId={selectedSubjectId} />}
   </div>
   );
 }
 
 export default SubjectsDisplay;
-export const selectedSubject = SubjectsDisplay.selectedSubject;

@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { AppProvider } from './components/AppContext'; 
-import { UserContextProvider } from './UserContext';
+import { SubjectProvider } from './components/SubjectContext'; 
+import { TopicProvider } from './components/TopicContext';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -12,9 +13,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
   <AppProvider>
-  <UserContextProvider>
-        <App />
-      </UserContextProvider>
+  <SubjectProvider>
+  <TopicProvider>
+      <App />
+    </TopicProvider>
+    </SubjectProvider>
   </AppProvider>
 </React.StrictMode>
 );

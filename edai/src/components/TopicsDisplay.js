@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import ContentDisplay from './ContentDisplay';
+import React, { useEffect, useState, useContext } from 'react';
+import { SubjectContext } from './SubjectContext';
+import TopicContent from './TopicContent';
 
-function TopicsDisplay({ selectedSubjectId }) {
+function TopicsDisplay() {
   const [topics, setTopics] = useState([]);
-  const [selectedTopicId, setSelectedTopicId] = useState(0);
+  const { selectedSubjectId } = useContext(SubjectContext);
+  const [selectedTopicId, setSelectedTopicId] = useState(null);
 
   useEffect(() => {
     // Fetch topics for the selected subject
@@ -15,18 +17,7 @@ function TopicsDisplay({ selectedSubjectId }) {
 
   const fetchTopics = async (subjectId) => {
     try {
-      const access_token = localStorage.getItem('access_token');
-      if (!access_token) {
-        console.error('Access token not found in localStorage.');
-        return;
-      }
-
-      const response = await fetch(`http://3.85.54.102/subject/${subjectId}/topics`, {
-        headers: {
-          'Authorization': `Bearer ${access_token}`,
-        },
-      });
-
+      const response = await fetch(`http://3.85.54.102/api/subject/${subjectId}/topics`);
       if (response.ok) {
         const data = await response.json();
         setTopics(data);
@@ -40,37 +31,35 @@ function TopicsDisplay({ selectedSubjectId }) {
 
   const handleTopicClick = (topicId) => {
     setSelectedTopicId(topicId);
-    console.log('Topic clicked:', topicId);
+    console.log('Topic id:', topicId);
   };
 
   const handleMouseEnter = (event) => {
     // Change text color to white on hover
-    const anchor = event.target;
-    anchor.style.color = 'white';
+    event.target.style.color = 'black';
   };
 
   const handleMouseLeave = (event) => {
     // Change text color back to black on hover exit
-    const anchor = event.target;
-    anchor.style.color = 'black';
+    event.target.style.color = 'white';
   };
 
   return (
-    <div>
-      <ul>
-        {topics && topics.map(topic => (
-          <li key={topic.id} onClick={() => handleTopicClick(topic.id)} style={{ cursor: 'pointer' }}>
+    <div className="topicslist">
+    <ul style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(0, 1fr))', listStyle: 'none', padding: 0, margin: 0 }}>
+       {topics && topics.map(topic => (
+          <li key={topic.id} onClick={() => handleTopicClick(topic.id)} style={{ cursor: 'pointer', fontSize: '15px' }}>
             <a
-            onClick={() => handleTopicClick(topic.id)}
-            style={{ color: 'black', transition: 'color 0.3s ease' }}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          ></a>
-            {topic.topic}
+              onClick={() => handleTopicClick(topic.id)}
+              style={{ color: 'white', transition: 'color 0.3s ease' }}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              {topic.topic}
+            </a>
           </li>
         ))}
       </ul>
-      {selectedTopicId && <ContentDisplay selectedTopicId={selectedTopicId} />}
     </div>
   );
 }

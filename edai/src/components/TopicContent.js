@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { TopicContext } from './TopicContext';
+import ContentDisplay from './ContentDisplay';
 
-function TopicContent({ topicId }) {
+function TopicContent() {
   const [content, setContent] = useState(null);
+  const { selectedTopicId } = useContext(TopicContext);
 
   useEffect(() => {
+    if (!selectedTopicId) return;
+
     // Fetch the content from the API endpoint
     const access_token = localStorage.getItem('access_token');
 
@@ -12,7 +17,7 @@ function TopicContent({ topicId }) {
       return;
     }
 
-    fetch(`http://3.85.54.102/api/topic/${topicId}/content`, {
+    fetch(`http://3.85.54.102/api/topic/${selectedTopicId}/content`, {
       headers: {
         'Authorization': `Bearer ${access_token}`,
       },
@@ -23,9 +28,12 @@ function TopicContent({ topicId }) {
         }
         return response.json();
       })
-      .then(data => setContent(data))
+      .then(data => {
+        // Assuming the response data contains a 'content' field with the content text
+        setContent(data.content);
+      })
       .catch(error => console.error('Error fetching content:', error));
-  }, [topicId]);
+  }, [selectedTopicId]);
 
   if (!content) {
     return <p>Loading...</p>; // Placeholder while the content is being fetched
@@ -34,9 +42,8 @@ function TopicContent({ topicId }) {
   return (
     <div>
       {/* Render the fetched content */}
-      <h2>{content.title}</h2>
-      <p>{content.description}</p>
-      {/* Additional content rendering */}
+      <p>{content}</p>
+      {selectedTopicId && <ContentDisplay topicId={selectedTopicId} />}
     </div>
   );
 }

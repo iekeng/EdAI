@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import edailogo from '../EdAI Logo.png';
 import SchoolSection from './SchoolSection';
 import SubjectsDisplay from './SubjectsDisplay';
@@ -21,6 +21,7 @@ import { Link } from 'react-router-dom';
 function Dashboard() {
   // const [globalCountryId, setGlobalCountryId] = useState(null)
   // const [subjectId, setSubjectId] = useState(null)
+  const selectedSubjectId = useState(null);
   return (
     <AccessTokenProvider> 
    <header>
@@ -85,7 +86,7 @@ function Dashboard() {
       </section>
       <section id="study-window">
         <div id="topicslist">
-          <TopicsDisplay />
+        <>{selectedSubjectId && <TopicsDisplay selectedSubjectId={selectedSubjectId} />}</>
         </div>
         <div id="contentdisplay">
           <ContentDisplay />
