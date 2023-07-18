@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { SubjectContext } from './SubjectContext';
-import ContentDisplay from './ContentDisplay';
+// import ContentDisplay from './ContentDisplay';
+import { TopicContext } from './TopicContext';
 
 function TopicsDisplay() {
   const [topics, setTopics] = useState([]);
   const { selectedSubjectId } = useContext(SubjectContext);
-  const [selectedTopicId, setSelectedTopicId] = useState(null);
+  const {selectedTopicId, setSelectedTopicId} = useContext(TopicContext);
 
   useEffect(() => {
     // Fetch topics for the selected subject
@@ -13,7 +14,7 @@ function TopicsDisplay() {
       console.log('Fetching topics for subject:', selectedSubjectId);
       fetchTopics(selectedSubjectId);
     }
-  }, [selectedSubjectId]);
+  });
 
   const fetchTopics = async (subjectId) => {
     try {

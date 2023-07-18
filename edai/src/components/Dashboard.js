@@ -17,14 +17,14 @@ import Footer from './Footer';
 import { AppProvider } from './AppContext';
 import { AccessTokenProvider } from './AccessTokenContext';
 import { Link } from 'react-router-dom';
+import { TopicProvider } from './TopicContext';
 
 function Dashboard() {
-  // const [globalCountryId, setGlobalCountryId] = useState(null)
-  // const [subjectId, setSubjectId] = useState(null)
-  const selectedSubjectId = useState(null);
-  const selectedTopicId = useState(null);
+
+  const [selectedTopicId, setSelectedTopicId] = useState(null);
   return (
     <AccessTokenProvider> 
+      <TopicProvider>
    <header>
   <Link to='/'>
     <img id="logo" src={edailogo} alt="Logo" />
@@ -87,10 +87,10 @@ function Dashboard() {
       </section>
       <section id="study-window">
         <div id="topicslist">
-        <>{selectedSubjectId && <TopicsDisplay selectedSubjectId={selectedSubjectId} />}</>
+        <TopicsDisplay setSelectedTopicId={setSelectedTopicId} />
         </div>
         <div id="contentdisplay">
-          <>{selectedTopicId && <ContentDisplay selectedTopicId={selectedTopicId} />}</>
+        <ContentDisplay selectedTopicId={selectedTopicId} />
         </div>
         <section id="chatbot-window">
           <ChatWindow />
@@ -98,6 +98,7 @@ function Dashboard() {
         <Footer />
       </section>
     </div>
+    </TopicProvider>
     </AccessTokenProvider>
   );
 }
