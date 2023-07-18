@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { SubjectContext } from './SubjectContext';
-import TopicContent from './TopicContent';
+import ContentDisplay from './ContentDisplay';
 
 function TopicsDisplay() {
   const [topics, setTopics] = useState([]);
@@ -48,7 +48,7 @@ function TopicsDisplay() {
     <div className="topicslist">
     <ul style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(0, 1fr))', listStyle: 'none', padding: 0, margin: 0 }}>
        {topics && topics.map(topic => (
-          <li key={topic.id} onClick={() => handleTopicClick(topic.id)} style={{ cursor: 'pointer', fontSize: '15px' }}>
+          <li key={topic.id} style={{ cursor: 'pointer', fontSize: '15px' }}>
             <a
               onClick={() => handleTopicClick(topic.id)}
               style={{ color: 'white', transition: 'color 0.3s ease' }}

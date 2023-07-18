@@ -22,6 +22,7 @@ function Dashboard() {
   // const [globalCountryId, setGlobalCountryId] = useState(null)
   // const [subjectId, setSubjectId] = useState(null)
   const selectedSubjectId = useState(null);
+  const selectedTopicId = useState(null);
   return (
     <AccessTokenProvider> 
    <header>
@@ -89,7 +90,7 @@ function Dashboard() {
         <>{selectedSubjectId && <TopicsDisplay selectedSubjectId={selectedSubjectId} />}</>
         </div>
         <div id="contentdisplay">
-          <ContentDisplay />
+          <>{selectedTopicId && <ContentDisplay selectedTopicId={selectedTopicId} />}</>
         </div>
         <section id="chatbot-window">
           <ChatWindow />

@@ -4,7 +4,7 @@ import { SubjectContext } from './SubjectContext';
 
 function SubjectsDisplay() {
   const [subjects, setSubjects] = useState([]);
-  const { setSelectedSubjectId } = useContext(SubjectContext);
+  const { selectedSubjectId, setSelectedSubjectId } = useContext(SubjectContext);
 
   useEffect(() => {
     // Fetch user subjects when the component mounts
@@ -58,20 +58,22 @@ function SubjectsDisplay() {
     // Change text color to white on hover
     const anchor = event.target;
     anchor.style.color = 'white';
+    anchor.style.backgroundColor = 'lightblue';
   };
 
   const handleMouseLeave = (event) => {
     // Change text color back to black on hover exit
     const anchor = event.target;
     anchor.style.color = 'black';
+    anchor.style.backgroundColor = 'transparent';
   };
 
   return (
     <div>
     <h2>Subjects</h2>
-    <ul id='subjects-li'>
+    <ul id='subjects-li' style={{ listStyle: 'none' }}>
       {subjects.map(subject => (
-        <li key={subject.id} value={subject.subject} style={{ cursor: 'pointer' }}>
+        <li key={subject.id} value={subject.subject} style={{ cursor: 'pointer',  backgroundColor: selectedSubjectId === subject.id ? 'lightblue' : 'transparent' }}>
           <a
             onClick={() => handleSubjectClick(subject.id)}
             style={{ color: 'black', transition: 'color 0.3s ease' }}

@@ -1,48 +1,31 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { TopicContext } from './TopicContext';
 
-function ContentDisplay() {
-  const [content, setContent] = useState(null);
+function ContentDisplay(){
+  const [content, setContent] = useState('')
   const { selectedTopicId } = useContext(TopicContext);
 
-  useEffect(() => {
-    if (!selectedTopicId) return;
-
-    // Fetch the content from the API endpoint
-    const access_token = localStorage.getItem('access_token');
-
-    if (!access_token) {
-      console.error('Access token not found in localStorage.');
-      return;
+  useEffect (()=>{
+    if(selectedTopicId){
+      console.log('Received Topic Id', selectedTopicId);
+      fetchContent(selectedTopicId);
     }
+}, [selectedTopicId]);
 
-    fetch(`http://3.85.54.102/api/topic/${selectedTopicId}/content`, {
-      headers: {
-        'Authorization': `Bearer ${access_token}`,
-      },
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        // Assuming the response data contains a 'content' field with the content text
-        setContent(data.content);
-      })
-      .catch(error => console.error('Error fetching content:', error));
-  }, [selectedTopicId]);
+const fetchContent = async (topicId) => {
+  try {
+    const response = await fetch(`http://3.85.54.102/api/topic/${topicId}/content`);
+    const data = await response.json();
+    setContent(data.content)
 
-  if (!content) {
-    return <p>Loading...</p>; // Placeholder while the content is being fetched
+  } catch (error){
+    console.error('Error fetching content: ', error)
   }
+};
 
   return (
     <div>
-      {/* Render the fetched content */}
-      <p>{content}</p>
-      {selectedTopicId && <ContentDisplay topicId={selectedTopicId} />}
+      {content}
     </div>
   );
 }

@@ -46,6 +46,7 @@ function ChatWindow() {
       const access_token = localStorage.getItem('access_token');
       setIsLoading(true);
       const prompt = newMessage;
+      setMessages([...messages, prompt])
 
       if (prompt) {
         setNewMessage('');
@@ -112,7 +113,7 @@ function ChatWindow() {
               </div>
             </div>
             <footer className="message-input">
-              <input style={{ width: '70%', backgroundColor: 'white' }} className="chat-textarea" type="text" placeholder="Type here"
+              <input style={{ width: '70%', color: 'white' }} className="chat-textarea" type="text" placeholder="Type here"
                 value={newMessage} onChange={(e) => setNewMessage(e.target.value)} />
               <button style={{ width: '30%' }} onClick={sendMessage}>Send</button>
             </footer>
