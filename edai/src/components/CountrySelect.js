@@ -1,46 +1,56 @@
 import React, { useState, useEffect } from 'react';
 
-function CountrySelect({ onCountryChange, setGlobalCountryId }) {
-    const [countryId, setCountryId] = useState('');
-  
-    useEffect(() => {
-      if (countryId) {
-        // Make the POST request for the selected country
-        fetch('http://18.210.33.70/post/country', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ name: countryId }),
-        })
-          .then(response => response.json())
-          .then(data => {
-            // Assuming the response contains the newly created country object
-            const newCountry = data;
-            // Trigger the onCountryChange callback with the new country
-            onCountryChange(newCountry);
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
-      }
-    }, [countryId, onCountryChange]);
-  
-    const handleCountryChange = (event) => {
-      setCountryId(event.target.value);
-      setGlobalCountryId(countryId)
-    };
-  
-    return (
-      <div>
-        <select value={countryId} onChange={handleCountryChange}>
-          <option value="">Select Country</option>
-          <option value="1">Nigeria</option>
-          <option value="2">Kenya</option>
-          <option value="3">South Africa</option>
-        </select>
-      </div>
-    );
-  }
+function CountrySelect() {
+  const [userCountry, setUserCountry] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
-  export default CountrySelect;
+  useEffect(() => {
+    const access_token = localStorage.getItem('access_token');
+
+    if (access_token) {
+      fetchUserCountry(access_token);
+    } else {
+      setLoading(false);
+    }
+  }, []);
+
+  const fetchUserCountry = async (access_token) => {
+    try {
+      const response = await fetch('http://3.85.54.102/api/user/country', {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const countryName = data.country;
+        setUserCountry(countryName);
+      } else {
+        setError('Error fetching user country');
+      }
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching user country:', error);
+      setError('Error fetching user country');
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div style={{ paddingBottom: '0px' }}>
+      {loading ? (
+        <h2>Loading...</h2>
+      ) : error ? (
+        <p>{error}</p>
+      ) : userCountry ? (
+        <h2 style={{ fontSize: '14px' }}>Country: {userCountry}</h2>
+      ) : (
+        <h2 style={{ fontSize: '14px' }}>No country selected.</h2>
+      )}
+    </div>
+  );
+}
+
+export default CountrySelect;

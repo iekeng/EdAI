@@ -1,9 +1,7 @@
 import React from 'react';
 
-// Create a new UserContext
 export const UserContext = React.createContext();
 
-// UserContext Provider component
 export const UserContextProvider = ({ children }) => {
   const [user, setUser] = React.useState(null);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);

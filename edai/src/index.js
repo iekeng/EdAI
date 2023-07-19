@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { UserContextProvider } from './UserContext';
+import { AppProvider } from './components/AppContext'; 
+import { SubjectProvider } from './components/SubjectContext'; 
+import { TopicProvider } from './components/TopicContext';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -10,10 +12,14 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <UserContextProvider>
+  <AppProvider>
+  <SubjectProvider>
+  <TopicProvider>
       <App />
-    </UserContextProvider>
-  </React.StrictMode>
+    </TopicProvider>
+    </SubjectProvider>
+  </AppProvider>
+</React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

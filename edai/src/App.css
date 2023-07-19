@@ -1,5 +1,4 @@
 header {
-
   background-color: #1E90FF;
   padding: 5px;
   margin: 5px;
@@ -14,39 +13,41 @@ header {
   right: 0;
   z-index: 1;
   box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #logo {
-
-  width: 6.5%;
   height: 80px;
   margin-top: 5px;
   box-shadow: 5px 5px 5px black;
   border-radius: 50%;
   background-color: white;
-  float: left;
 }
 
 #header-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  max-width: 600px;
+}
 
-  display: inline;
-  width: 50%;
-  height: 90px;
-  float: right;
-  text-align: right;
+.nav-line {
+  margin: 0;
+  padding: 0;
 }
 
 .header-nav-ul {
-
   list-style: none;
   text-decoration: none;
   margin: 0;
   padding: 0;
-  white-space: nowrap;
+  line-height: 0.2;
 }
 
 #header-nav li {
-
   display: inline-block;
   margin-right: 5px;
   list-style: none;
@@ -55,11 +56,10 @@ header {
 
 #header-nav button,
 #header-nav select {
-vertical-align: middle;
+  vertical-align: middle;
 }
 
 #header-nav .nav-tem {
-
   color: white;
   font-size: 20px;
   font-weight: bold;
@@ -70,22 +70,17 @@ vertical-align: middle;
   border: 5px solid #000000;
   background-color: #1E90FF;
   padding: 10px 20px;
-  margin: 5px;    
+  margin: 0px; 
+  text-align: center; 
 }
 
 #curriculum_id {
-
   color: white;
   font-size: 10px;
   font-weight: bold;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   text-shadow: 2px 2px 2px black;
-  /* box-shadow: 5px 5px 5px black; */
   border-radius: 20px;
-  /* border: 5px solid #000000;
-  background-color: #1E90FF;
-  padding: 5px 5px;
-  margin: 5px;     */
 }
 
 .progress-chart {
@@ -105,18 +100,17 @@ vertical-align: middle;
 }
 
 #header-nav .nav-tem:hover {
-
   background-color: #00BFFF;
   color: black;
   box-shadow: 5px 5px 5px black;
 }
 
 #header-nav .nav-tem:active {
-
   background-color: #00BFFF;
   color: black;
   box-shadow: 5px 5px 5px black;
 }
+
 
 #dashboard-container {
 
@@ -214,11 +208,11 @@ vertical-align: middle;
   box-shadow: 5px 5px 5px black;
 }
 
-#subjects li:hover {
+#subjects-li a:hover {
 
-  background-color: black;
+  /* background-color: white;
   color: white;
-  box-shadow: 5px 5px 5px black;
+  box-shadow: 5px 5px 5px black; */
 }
 
 #study-window {
@@ -236,10 +230,10 @@ vertical-align: middle;
 }
 
 #topicslist {
-  
+
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); 
-  width: 99%;   
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  width: 99%;
   height: 30px;
   box-shadow: 5px 5px 5px white;
   border-radius: 10px;
@@ -252,12 +246,12 @@ vertical-align: middle;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-#topicslist li:hover {
+/* #topicslist li:hover {
 
   background-color: black;
   color: white;
   box-shadow: 5px 5px 5px black;
-}
+} */
 
 #contentdisplay {
 
@@ -273,60 +267,6 @@ vertical-align: middle;
   overflow-y: auto;
 }
 
-.chatbot-window {
-  position: fixed;
-  bottom: 10px;
-  right: 18px;
-  background-color: #f2f2f2;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  transition: width 0.3s ease, height 0.3s ease;
-}
-
-.chatbot-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
-  padding: 0 10px;
-  overflow-y: auto;
-  z-index: 40;
-}
-
-.chatbot-input {
-  flex: 1;
-  height: 100%;
-  border: none;
-  background-color: transparent;
-  padding: 5px;
-  font-size: 14px;
-}
-
-.chatbot-options button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  margin-left: 10px;
-  padding: 5px;
-}
-
-.chatbot-options button:focus {
-  outline: none;
-}
-
-.button-img {
-
-  width: 20px;
-  height: 20px;
-  border: #000000;
-  border-radius: 10px;
-}
-#typing-option:hover, #audio-option:hover {
-  background-color: rgb(0, 174, 255);
-  color: black;
-}
-
-
 /* Media queries */
 @media screen and (max-width: 1200px) {
   h1,
@@ -337,21 +277,35 @@ vertical-align: middle;
 
 @media screen and (max-width: 992px) {
   header {
-    height: 80px;
+    height: auto;
+    width: 98.8%;
   }
 
   #logo {
-    height: 70px;
+    height: 100px;
+    margin-top: auto;
   }
 
   #header-nav {
     height: 80px;
+    width: auto;
   }
 
   .nav-tem {
     font-size: 16px;
     padding: 8px 16px;
   }
+
+  .progress-chart {
+
+    height: 20px;
+
+}
+
+body {
+
+  width: 97.7%;
+}
 
   #curriculum_id {
     font-size: 8px;
@@ -397,7 +351,7 @@ vertical-align: middle;
 
   #topicslist li {
     font-size: 16px;
-    padding: 8px 16px;
+    padding: 0;
   }
 }
 

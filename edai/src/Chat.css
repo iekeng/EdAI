@@ -1,0 +1,248 @@
+a {
+    text-decoration: none;
+  }
+  .chatarea {
+    display: flex;
+  }
+  .chatBox{
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(10px);
+      height: 400px;
+      width: 300px;
+      margin: 40px;
+      margin-bottom: 0;
+      font-size: 13px;
+      overflow: auto;
+    } 
+    .chat-content{
+    overflow: auto;
+    height: 300px;
+  }
+   
+    .card-header{
+      background: #1E90FF;
+    }
+    .card-header .p {
+      width: 50%;
+    }
+    
+    .header-title{
+      height: 30px;
+    }
+    .card-header-title i{
+      font-size: 10px;
+      color: #32e4cd;
+      margin-right: 6px;
+    }
+    .card-header .card-header-title{
+      margin-top: 0;
+      color: #FFF;
+      padding-top: 5px;
+    }
+    .chat-content small{
+      margin: 0;
+    }
+    .chat-content p{
+      background: #ecf1f8;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 0;
+    }
+    .my-content .media-content{
+      width: 80%;
+    }
+    .my-content .chat-content small{
+      float: right;
+    }
+    .my-content small{
+      display: block;
+      float: right;
+      width: 100%;
+      text-align: right;
+    }
+    .chat-textarea{
+      font-size: 13px;
+      /* padding: 2px; */
+      height: 40px;
+      width: 100%;
+      border: none;
+      
+      outline: none;
+    
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+      resize: none;
+    }
+    .chat-message-group .chat-messages{
+      float: left;
+      width: 80%;
+      margin-bottom: 20px;
+    }
+    .chat-message-group .message{
+      float: left;
+      padding: 5px;
+      background: #ecf1f8;
+      font-size: 13px;
+      border-radius: 5px;
+      margin-bottom: 3px;
+    }
+    .chat-messages .from{
+      float: left;
+      display: block;
+      width: 100%;
+      text-align: left;
+      font-size: 11px;
+    }
+    .writer-user .chat-messages .from{
+      float: left;
+      display: block;
+      width: 100%;
+      text-align: right;
+    }
+    .chat-message-group .typing{
+      float: left;
+    }
+    .chatBox .card-header-icon i{
+      color: #FFF;
+      font-size: 13px;
+    }
+   
+    .card-header-title img{
+      border-radius: 40px;
+    }
+     .message-input {
+      display: flex;
+    }
+    
+    .message-input input[type="text"] {
+      background: none;
+      border-top: 1px solid #ccc;
+    }
+    .message-input button {
+      height: 70%;
+      padding: 10px 20px;
+      background-color: #1f8fff;
+      color: #fff;
+      border: none;
+      margin-left: 15px;
+      cursor: pointer;
+    } 
+   
+    .show{
+      display: block;
+    }
+    .hide {
+      display: none;
+    }
+    .spinner {
+      margin: 0px 135px;
+      width: 70px;
+      /* text-align: center; */
+    }
+    
+    .spinner > div {
+      width: 4px;
+      height: 4px;
+      background-color: #888;
+    
+      border-radius: 100%;
+      display: inline-block;
+      -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+      animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    }
+    
+    .spinner .bounce1 {
+      -webkit-animation-delay: -0.32s;
+      animation-delay: -0.32s;
+    }
+    
+    .spinner .bounce2 {
+      -webkit-animation-delay: -0.16s;
+      animation-delay: -0.16s;
+    }
+    
+    @-webkit-keyframes sk-bouncedelay {
+      0%, 80%, 100% { -webkit-transform: scale(0) }
+      40% { -webkit-transform: scale(1.0) }
+    }
+    
+    @keyframes sk-bouncedelay {
+      0%, 80%, 100% { 
+        -webkit-transform: scale(0);
+        transform: scale(0);
+      } 40% { 
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
+      }
+    }
+    .sponsor {
+      margin-bottom: 4px;
+      color: #888;
+    }
+    .placeholder {
+      font-size: 12px;
+      position: fixed;
+      color: black;
+      right: 30px;
+      bottom:10px;
+      width: 300px;
+      height: 50px;
+    }
+
+    /* Small mobile phones */
+/* @media screen and (max-width: 320px) {
+  .chatBox {
+    width: 100%;
+    height: 300px;
+    margin: 10px;
+  }
+}
+
+Mobile phones in portrait mode
+@media screen and (min-width: 321px) and (max-width: 480px) {
+  .chatBox {
+    width: 90%;
+    height: 350px;
+    margin: 20px;
+  }
+}
+
+/* Mobile phones in landscape mode and small tablets */
+/* @media screen and (min-width: 481px) and (max-width: 767px) {
+  .chatBox {
+    width: 80%;
+    height: 400px;
+    margin: 30px;
+  }
+} */
+
+/* Tablets and small laptops */
+/* @media screen and (min-width: 768px) and (max-width: 1023px) {
+  .chatBox {
+    width: 600px;
+    height: 400px;
+    margin: 40px auto;
+  }
+} */
+
+/* Tablets and laptops in landscape mode */
+/* @media screen and (min-width: 1024px) and (max-width: 1365px) {
+  .chatBox {
+    width: 800px;
+    height: 500px;
+    margin: 50px auto;
+  }
+} */
+
+/* Larger desktops and high-resolution screens */
+/* @media screen and (min-width: 1920px) {
+  .chatBox {
+    width: 1000px;
+    height: 700px;
+    margin: 70px auto;
+  }
+}  */
