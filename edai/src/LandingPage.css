@@ -1,0 +1,438 @@
+#LPContainer {
+
+   width: 99.5%;
+   height: 100%;
+   background: linear-gradient(to right, #d5dbdb, #3db9c9);
+   border-radius: 10px;
+   box-shadow: 5px 5px 5px black;
+  }
+
+#LP-Header{
+
+    background-color: #1E90FF;
+    padding: 5px;
+    margin: 5px;
+    margin-right: 20px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px black;
+    width: 99%;
+    height: 100px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    box-sizing: border-box;
+  }
+
+.HLPbuttoncontainer {
+
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20px;
+    margin-top: 30px;
+  }
+  
+
+#Valp-Curr {
+
+  display: grid;
+  /* width: 99.5%; */
+  grid-template-columns: 50% 50%;
+  gap: 10px;
+  margin-top: 120px;
+  height: 390px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px black;
+}
+
+#Valueproposition {
+
+  /* display: block; */
+  margin-top: 0px;
+  height: 390px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px black;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0), rgb(129, 126, 126)), url('../study-group-img.avif');
+  background-size: cover;
+  background-position: center
+}
+
+#Valp-h1 {
+
+  padding-top: 0px;
+  font-size: 40px;
+  font-weight: bold;
+  margin-left: 20px;
+  text-align: left;
+  color: rgb(5, 39, 39);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-style: italic;
+}
+
+#Valueproposition p {
+
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-style: italic;
+  width: 80%;
+  margin-left: 20px;
+  text-align: left;
+  background: rgba(24, 23, 23, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px black;
+  background-clip: padding-box;
+}
+
+#LPbutton {
+
+  margin-top: 10px;
+  padding: 8px 15px;
+  background-color: #4285f4;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+#Curriculum {
+
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  margin-top: px;
+  width: 98%;
+  height: 390px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px black;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgb(129, 126, 126)), url('../Student-Studying.jpg');
+  background-size: cover;
+  background-position: center
+}
+
+#Curriculum h1 {
+
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 30px;
+
+}
+
+.list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.swipe-list-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.swipe-list {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 20px;
+  font-weight: bold;
+  width: 60%;
+  background: rgba(24, 23, 23, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px black;
+  background-clip: padding-box;
+}
+
+#WorkingExp {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 40px;
+  background: linear-gradient(to right, rgba(54, 43, 43, 0.603), rgba(255, 255, 255, 0.205));
+  background-position: center;
+  background-size: cover;
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 40px;
+  margin-left: auto;
+}
+
+#workingExp h1 {
+  margin-top: 30px;
+  font-size: 36px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+.how-it-works {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.how-it-works-text {
+  flex: 0 0 300px;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 5px 5px 5px black;
+}
+
+.how-it-works-text h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: green;
+}
+
+.how-it-works-text p {
+  font-size: 16px;
+  color: #666;
+}
+
+#testimonials-partners.TPcontainer {
+  display: block;
+  width: 99.5%;
+  margin-top: 10px;
+  height: 700px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px black;
+}
+
+.testimonials {
+  padding: 10px;
+  border-radius: 5px 50px 5px 50px;
+  background: linear-gradient(to left, rgba(83, 112, 106, 0.705), rgb(50, 101, 148)), url('./Gratified Student.avif');
+  background-size: cover;
+  background-position: right;
+  height: 50%;
+}
+
+.testimonials h1 {
+  padding-top: 0px;
+  font-size: 30px;
+  font-weight: bold;
+  margin-left: 20px;
+  text-align: left;
+  color: rgb(6, 22, 22);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-style: italic;
+}
+
+.testimonials p {
+  text-align: center;
+  /* height: 50%; */
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-style: italic;
+  width: 40%;
+  margin-left: 20px;
+  text-align: left;
+  background: rgba(24, 23, 23, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 10px;
+  border-radius: 5px 20px;
+  box-shadow: 5px 5px 5px black;
+  background-clip: padding-box;
+}
+
+.partners {
+  padding: 10px;
+  border-radius: 0 10px 10px 0;
+  margin-bottom: 0;
+}
+
+.partners h1 {
+  padding-top: 0px;
+  font-size: 30px;
+  font-weight: bold;
+  margin-left: 20px;
+  text-align: center;
+  color: rgb(6, 22, 22);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-style: italic;
+}
+
+.partners-logos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0px;
+}
+
+/* Media queries */
+@media screen and (max-width: 1200px) {
+  #Valp-Curr {
+    grid-template-columns: 100%;
+    height: auto;
+    margin-top: 30px;
+  }
+
+  #Valueproposition,
+  #Curriculum {
+    height: auto;
+  }
+
+  #Valp-h1,
+  #Valueproposition p,
+  #Curriculum h1 {
+    font-size: 24px;
+  }
+
+  .swipe-list {
+    width: 80%;
+  }
+
+  .how-it-works-text {
+    flex: 0 0 400px;
+  }
+
+  .testimonials,
+  .partners {
+    height: 100%;
+    background-position: center;
+  }
+
+  .testimonials h1,
+  .partners h1 {
+    margin-left: 10px;
+  }
+
+  .testimonials p,
+  .partners p {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #LP-Header {
+    margin-right: 10px;
+  }
+
+  #Valp-Curr {
+    grid-template-columns: 100%;
+    height: auto;
+    margin-top: 30px;
+  }
+
+  #Valueproposition,
+  #Curriculum {
+    height: auto;
+  }
+
+  #Valp-h1,
+  #Valueproposition p,
+  #Curriculum h1 {
+    font-size: 18px;
+  }
+
+  #LPbutton {
+    margin-top: 20px;
+  }
+
+  .swipe-list {
+    width: 90%;
+  }
+
+  .how-it-works-text {
+    flex: 0 0 300px;
+    margin: 10px;
+  }
+
+  .testimonials,
+  .partners {
+    height: 100%;
+    background-position: center;
+  }
+
+  .testimonials h1,
+  .partners h1 {
+    margin-left: 10px;
+  }
+
+  .testimonials p,
+  .partners p {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  #LPContainer {
+    width: 100%;
+  }
+
+  #LP-Header {
+    margin-right: 5px;
+  }
+
+  #Valp-Curr {
+    grid-template-columns: 100%;
+    height: auto;
+    margin-top: 20px;
+  }
+
+  #Valueproposition,
+  #Curriculum {
+    height: auto;
+  }
+
+  #Valp-h1,
+  #Valueproposition p,
+  #Curriculum h1 {
+    font-size: 16px;
+  }
+
+  #LPbutton {
+    margin-top: 20px;
+    padding: 6px 12px;
+  }
+
+  .swipe-list {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .how-it-works-text {
+    flex: 0 0 250px;
+    margin: 10px;
+  }
+
+  .testimonials,
+  .partners {
+    height: 100%;
+    background-position: center;
+  }
+
+  .testimonials h1,
+  .partners h1 {
+    margin-left: 10px;
+    font-size: 20px;
+  }
+
+  .testimonials p,
+  .partners p {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 14px;
+  }
+}

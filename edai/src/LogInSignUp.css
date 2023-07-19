@@ -1,0 +1,153 @@
+#LS-Header {
+
+  background-color: #1E90FF;
+  padding: 5px;
+  margin: 5px;
+  margin-right: 20px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px black;
+  width: 99%;
+  height: 100px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  box-sizing: border-box;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loginSignUp {
+  max-width: 400px;
+  margin-top: 10%;
+  margin-left: 35%;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px black;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+label {
+  margin-bottom: 5px; 
+}
+
+.input-label {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.LSInput {
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#email-input {
+  margin-left: px;
+}
+
+.LSbutton[type="submit"] {
+  padding: 10px 15px;
+  background-color: black;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  
+}
+
+.LSbutton[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.LSbutton {
+  margin-top: 10px;
+  padding: 8px 15px;
+  background-color: #4285f4;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.LSbutton:hover {
+  background-color: #45a049;
+}
+
+p {
+  text-align: center;
+}
+
+.LSbutton.toggle-button {
+  background-color: transparent;
+  border: none;
+  color: #4285f4;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.LSbutton-group {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.LSbutton-group button:not(:last-child) {
+  margin-right: 10px;
+}
+
+/* Media queries */
+@media screen and (max-width: 1200px) {
+  .loginSignUp {
+    margin-top: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .loginSignUp {
+    margin-top: 15%;
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .loginSignUp {
+    margin-top: 20%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .loginSignUp {
+    margin-top: 30%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+}
