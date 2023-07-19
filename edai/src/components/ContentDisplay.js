@@ -24,7 +24,7 @@ function ContentDisplay() {
   };
 
   return (
-    <div style={{ padding: '10px'}}>
+    <div style={{ padding: '15px'}}>
       {content}
     </div>
   );

@@ -307,6 +307,7 @@
   #Valueproposition,
   #Curriculum {
     height: auto;
+    width: auto;
   }
 
   #Valp-h1,
@@ -403,13 +404,53 @@
   }
 }
 
+@media (min-width: 901px) {
+  
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  
+}
+
+@media (max-width: 600px) {
+  #LP-Header {
+    font-size: 18px;
+    height: 80px;
+    padding: 3px;
+  }
+
+  .LPbuttonclass {
+    font-size: 12px;
+    padding: 6px 10px;
+    
+  }
+
+  .nav-item {
+    font-size: 12px;
+    padding: 0 5px;
+    
+  }
+}
+
 @media screen and (max-width: 576px) {
   #LPContainer {
     width: 100%;
   }
 
-  #LP-Header {
-    margin-right: 5px;
+  /* #LP-Header {
+    margin-right: px;
+  }
+
+  .LPbuttonclass {
+    font-size: 12px;
+    padding: 6px 10px;
+    
+  } */
+
+  .nav-item {
+    font-size: 12px;
+    padding: 0 5px;
+    
   }
 
   #Valp-Curr {
@@ -461,5 +502,25 @@
     margin-left: 10px;
     margin-right: 10px;
     font-size: 12px;
+  }
+}
+
+@media (max-width: 320px) {
+  #WorkingExp {
+    padding: 20px;
+  }
+  
+  .how-it-works-text {
+    flex: 0 0 100%;
+    margin: 10px;
+  }
+  
+  #testimonials-partners.TPcontainer {
+    height: 900px;
+  }
+
+  .nav-item {
+    font-size: 10px;
+    padding: 0 3px;
   }
 }
