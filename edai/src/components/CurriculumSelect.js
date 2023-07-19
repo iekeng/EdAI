@@ -1,34 +1,50 @@
 import React, { useState, useEffect } from 'react';
 
-const CurriculumSelect = ({ selectedCountry, globalCountryId }) => {
-  const [curriculum, setCurriculum] = useState('');
-  
+function CurriculumSelect() {
+  const [userCurriculum, setUserCurriculum] = useState('');
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    const fetchCurriculumData = async () => {
-      try {
-        // Make an API request to fetch the curriculum data for the selected country
-        const response = await fetch(`http://18.210.33.70/country/${globalCountryId}/curriculums`);
-        const data = await response.json();
+    fetchUserCurriculum();
+  }, []);
 
-        // Set the curriculum state with the fetched data
-        setCurriculum(data.curriculum);
-      } catch (error) {
-        console.error('Error fetching curriculum data:', error);
+  const fetchUserCurriculum = async () => {
+    try {
+      const access_token = localStorage.getItem('access_token');
+
+      if (access_token) {
+        const response = await fetch('http://3.85.54.102/api/user/curriculum', {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          const curriculumName = data.curriculum;
+          setUserCurriculum(curriculumName);
+          setLoading(false);
+        } else {
+          setLoading(false);
+        }
       }
-    };
-
-    //Call the fetchCurriculumData function when the selectedCountry state changes
-    if (globalCountryId && globalCountryId !== "") {
-      console.log('fetch curriculum called')
-      fetchCurriculumData();
+    } catch (error) {
+      console.error('Error fetching user curriculum:', error);
+      setLoading(false);
     }
-  }, [globalCountryId]);
+  };
 
   return (
-    <div>
-      <button>Curriculum: {curriculum}</button>
+    <div style={{ paddingTop: '0px' }}>
+      {loading ? (
+        <h2 style={{ fontSize: '13px' }}>Loading...</h2>
+      ) : userCurriculum ? (
+        <h2 style={{ fontSize: '14px' }}>Curriculum: {userCurriculum}</h2>
+      ) : (
+        <h2 style={{ fontSize: '14px' }}>No curriculum selected.</h2>
+      )}
     </div>
   );
-};
+}
 
 export default CurriculumSelect;

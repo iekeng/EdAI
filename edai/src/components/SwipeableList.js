@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Draggable from 'react-draggable';
 
 const SwipeableList = () => {
   const [lists] = useState([
@@ -96,7 +95,7 @@ const SwipeableList = () => {
         <button onClick={handleNextList}>&gt;</button>
       </div>
       <div className="swipe-list-container">
-        <Draggable axis="x">
+        
           <ul className="swipe-list">
             <li>{selectedList.country}</li>
             <li>{selectedList.curriculum}</li>
@@ -104,7 +103,7 @@ const SwipeableList = () => {
               <li key={index}>{subject}</li>
             ))}
           </ul>
-        </Draggable>
+        
       </div>
     </div>
   );

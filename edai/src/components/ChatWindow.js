@@ -1,125 +1,127 @@
-import React, { useState } from 'react';
-import sendSvg from '../send-svg.png';
-import audioSvg from '../audio-svg.png';
+import React, { useState, useEffect, useRef } from 'react';
+import '../Chat.css';
 
 function ChatWindow() {
-    const [isTyping, setIsTyping] = useState(false);
-    const [userInput, setUserInput] = useState('');
-    const [feedback, setFeedback] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
-  
-    const handleTyping = () => {
-      setIsTyping(true);
-    };
-  
-    const handleBlur = () => {
-      setIsTyping(false);
-    };
-  
-    const handleSubmit = async () => {
-      if (!userInput.trim()) {
-        return; // Don't submit if user input is empty or only whitespace
-      }
-  
-      try {
-        setIsLoading(true);
-  
-        // Make the API request
-        const response = await fetch('/api/chatbot/<str:prompt>', {
+  const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [isToggle, setIsToggle] = useState(false);
+  const messagesRef = useRef(0);
+
+  const handleChatDisplay = () => {
+    setIsToggle(!isToggle);
+  };
+
+  useEffect(() => {
+    if (messagesRef.current) {
+      messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+    }
+  }, [messages]);
+
+  useEffect(() => {
+    // Fetch messages when the component mounts
+    fetchMessagesAndUpdateState();
+  }, []);
+
+  const fetchMessagesAndUpdateState = async () => {
+    try {
+      const access_token = localStorage.getItem('access_token');
+      console.log('Access Token:', access_token); // Log the access token to the console
+
+      // Make the API request with the access token in the headers
+      const response = await fetch('http://3.85.54.102/api/chats', {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      });
+      const responseData = await response.json();
+      setMessages(responseData.messages);
+    } catch (error) {
+      console.error('Error fetching messages:', error);
+    }
+  };
+
+  const sendMessage = async () => {
+    try {
+      const access_token = localStorage.getItem('access_token');
+      setIsLoading(true);
+      const prompt = newMessage;
+      setMessages([...messages, prompt])
+
+      if (prompt) {
+        setNewMessage('');
+
+        // Send the message to the chatbot
+        const response = await fetch('http://3.85.54.102/api/chatbot', {
           method: 'POST',
-          body: JSON.stringify({ request: userInput }),
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${access_token}`,
           },
+          body: JSON.stringify({ prompt }),
         });
-  
-        // Check if the request was successful
-        if (response.ok) {
-          const data = await response.json();
-          const apiFeedback = data.feedback;
-  
-          setFeedback(apiFeedback);
-          setUserInput(''); // Clear the input field
-        } else {
-          console.error('API request failed:', response.status);
+        const responseData = await response.json();
+
+        // Update the state with the new message
+        if (responseData.message) {
+          setMessages([...messages, prompt, responseData.message]);
         }
-      } catch (error) {
-        console.error('Error:', error);
-      } finally {
+
         setIsLoading(false);
       }
-    };
-  
-    const getWindowStyle = () => {
-      if (isLoading) {
-        return {
-          height: 'auto',
-          maxHeight: '100px'
-        }
-      }
-      if (isTyping) {
-        return {
-          width: '40%',
-          height: '200px',
-        };
-      } else {
-        return {
-          width: '20%px',
-          height: '50px',
-        };
-      }
-    };
-
-    const chatbotContent = () => {
-      if (isLoading) {
-        return {
-          display: '',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          padding: '0 10px',
-          overflowY: 'auto',
-          zIndex: '40',
-        }
-      }
-      return {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        height: '100%',
-        padding: '0 10px',
-        overflowY: 'auto',
-        zIndex: '40',
-      }
+    } catch (error) {
+      console.error('Error sending message:', error);
     }
-  
-    return (
-      <div className="chatbot-window" style={getWindowStyle()}>
-        <div style={chatbotContent()} className="chatbot-content-old">
-          <input
-            type="text"
-            className="chatbot-input"
-            placeholder="Type here or press and hold the mic button to speak to me ;-)"
-            value={userInput}
-            onChange={(e) => setUserInput(e.target.value)}
-            onFocus={handleTyping}
-            onBlur={handleBlur}
-            disabled={isLoading}
-          />
-          <button className="chatbot-options" id="typing-option" onClick={handleSubmit} disabled={isLoading}>
-            <img className='button-img' src={sendSvg} alt='Send Icon'/>
-          </button>
-          <button className="chatbot-options" id="audio-option" disabled={isLoading}>
-            <img className='button-img' src={audioSvg} alt='Audio Icon'/>
-          </button>
-          <br/>
-          {isLoading ? (
-            <p style={{display: 'block'}} className="chatbot-feedback">Loading...</p>
-          ) : (
-            <p className="chatbot-feedback">{feedback}</p>
-          )}
+  };
+
+  return (
+    <div>
+      <a className={`placeholder ${isToggle ? 'show' : 'hide'}`} onClick={handleChatDisplay}>
+        <div className="card-header header-title">
+          <p className='card-header-title'>AI SUPPORT</p>
+        </div>
+      </a>
+
+      <div className={`chatBox ${isToggle ? 'hide' : 'show'}`} >
+
+        <div>
+          <a onClick={handleChatDisplay}>
+            <div className="card-header header-title">
+              <p className='card-header-title' >AI SUPPORT</p>
+            </div>
+          </a>
+          <div>
+            {isLoading ?
+              <div className="spinner">
+                <div className="bounce1"></div>
+                <div className="bounce2"></div>
+                <div className="bounce3"></div>
+              </div>
+              :
+              <div className='sponsor'>
+                <div style={{ textAlign: 'center' }} className='message'>Powered by ChatGPT</div>
+              </div>}
+            <div className='card-content chat-content'>
+              <div className='content'>
+                <div className="chat-message-group" ref={messagesRef} style={{ height: '300px', overflowY: 'auto' }}>
+                  <div className="chat-messages">
+                    {messages?.map((message, index) => (
+                      <div key={index} className="message">{message}</div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <footer className="message-input">
+              <input style={{ width: '70%', color: 'white' }} className="chat-textarea" type="text" placeholder="Type here"
+                value={newMessage} onChange={(e) => setNewMessage(e.target.value)} />
+              <button style={{ width: '30%' }} onClick={sendMessage}>Send</button>
+            </footer>
+          </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
 
 export default ChatWindow;
