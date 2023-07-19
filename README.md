@@ -30,9 +30,8 @@ __GET__ /curriculums: retrieves all curriculums from db
 __GET__ /country/{id}/curriculums: retrieves all curriculums from db for a specific country 
 __GET__ /country/{id}/curriculum/{d}: retrieves specific curriculum with id  
 __GET__ /country/{id}/curriculum/{id}/subjects: retrieves subjects from a specific curriculum  
-__GET__ /curriculum/{id}/subject/{id}: retrieves specific subject of a curriculum  
+__GET__ /country/{id}/curriculum/{id}/subject/{id}: retrieves specific subject of a curriculum  
 __GET__ /country/{id}/curriculum/{id}/subject/{id}/topics: retrieves all topics and topic content from a subject in a curriculum  
 
 ## Conclusion
 This API documentation provides an overview of the available endpoints, request/response formats and authentication requirements for the EdAI API.
-//OPENAI_API_KEY='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'//
