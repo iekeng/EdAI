@@ -119,4 +119,4 @@ Contributions to EdAI are welcome! If you would like to contribute, please follo
 Our platform consists of a frontend built with React.js and a backend built with Flask, together with SQLAlchemy. The frontend components communicate with each other through React Context, while REST APIs facilitate seamless communication between the frontend and backend.
 
 ## Conclusion
-This API documentation provides an overview of the available endpoints, request/response formats and authentication requirements for the EdAI API. //OPENAI_API_KEY='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'//
+This API documentation provides an overview of the available endpoints, request/response formats and authentication requirements for the EdAI API. 
