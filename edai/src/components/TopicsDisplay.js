@@ -18,7 +18,7 @@ function TopicsDisplay() {
 
   const fetchTopics = async (subjectId) => {
     try {
-      const response = await fetch(`http://3.85.54.102/api/subject/${subjectId}/topics`);
+      const response = await fetch(`/subject/${subjectId}/topics`);
       if (response.ok) {
         const data = await response.json();
         setTopics(data);

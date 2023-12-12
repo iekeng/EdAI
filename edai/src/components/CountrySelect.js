@@ -17,7 +17,7 @@ function CountrySelect() {
 
   const fetchUserCountry = async (access_token) => {
     try {
-      const response = await fetch('http://3.85.54.102/api/user/country', {
+      const response = await fetch('/user/country', {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },

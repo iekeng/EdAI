@@ -19,7 +19,7 @@ function SubjectsDisplay() {
         return;
       }
 
-      const response = await fetch('http://3.85.54.102/api/user/subjects', {
+      const response = await fetch('/user/subjects', {
         headers: {
           'Authorization': `Bearer ${access_token}`,
         },

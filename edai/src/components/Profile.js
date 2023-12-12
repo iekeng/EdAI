@@ -12,7 +12,7 @@ function ProfileDisplay() {
     try {
       const access_token = localStorage.getItem('access_token');
       if (access_token) {
-        const response = await fetch('http://3.85.54.102/api/user/profile', {
+        const response = await fetch('/user/profile', {
           headers: {
             'Authorization': `Bearer ${access_token}`,
           },

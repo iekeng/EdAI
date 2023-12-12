@@ -14,7 +14,7 @@ function ContentDisplay() {
 
   const fetchContent = async (topicId) => {
     try {
-      const response = await fetch(`http://3.85.54.102/api/topic/${topicId}/content`);
+      const response = await fetch(`/topic/${topicId}/content`);
       const data = await response.json();
       console.log('Content:', data.content);
       setContent(data.content);

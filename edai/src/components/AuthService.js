@@ -1,7 +1,7 @@
 class AuthService {
   // Login method
   login(email, password) {
-    return fetch('http://3.85.54.102/api/auth/login', {
+    return fetch('/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

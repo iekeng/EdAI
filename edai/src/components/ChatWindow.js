@@ -29,7 +29,7 @@ function ChatWindow() {
       console.log('Access Token:', access_token); // Log the access token to the console
 
       // Make the API request with the access token in the headers
-      const response = await fetch('http://3.85.54.102/api/chats', {
+      const response = await fetch('/chats', {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
@@ -52,7 +52,7 @@ function ChatWindow() {
         setNewMessage('');
 
         // Send the message to the chatbot
-        const response = await fetch('http://3.85.54.102/api/chatbot', {
+        const response = await fetch('/chatbot', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
