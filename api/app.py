@@ -1,14 +1,16 @@
-import os, openai
+import os
+from openai import OpenAI
 from flask import request, jsonify
 from flask_praetorian import auth_required, current_user
 from dotenv import load_dotenv, find_dotenv
 from . import *
 
 load_dotenv(find_dotenv()) 
-
 app = create_app()
-
-openai.api_key = os.environ['OPENAI_API_KEY']
+api_key = os.environ['OPENAI_API_KEY']
+client = OpenAI(
+    api_key=api_key
+)
 
 @main.post('/auth/login', strict_slashes=False)
 def login():
@@ -25,10 +27,6 @@ def refresh():
     result = {'access_token': new_token}
     return result
 
-@main.get('/protected', strict_slashes=False)
-@auth_required
-def protected():
-    return f'protected endpoint (allowed user {current_user().email})'
 
 @main.post('/chatbot', strict_slashes=False)
 @auth_required
@@ -44,18 +42,14 @@ def chatbot(model="gpt-3.5-turbo"):
 
     message_prompt = Message(prompt, student_id)
 
-    # db.session.add(message_prompt)
-    # db.session.commit()
-
     new_message = {"role": "user", "content": prompt}
     messages.append(new_message)
 
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model=model,
-        messages=messages,
-        temperature=0.2,
+        messages=messages
     )
-    result = response.choices[0].message["content"]
+    result = response.choices[0].message.content
 
     message_result = Message(result, student_id)
 
