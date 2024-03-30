@@ -17,7 +17,7 @@ function TopicContent() {
       return;
     }
 
-    fetch(`/topic/${selectedTopicId}/content`, {
+    fetch(`/api/topic/${selectedTopicId}/content`, {
       headers: {
         'Authorization': `Bearer ${access_token}`,
       },

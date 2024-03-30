@@ -19,7 +19,7 @@ function SubjectsDisplay() {
         return;
       }
 
-      const response = await fetch('/user/subjects', {
+      const response = await fetch('/api/user/subjects', {
         headers: {
           'Authorization': `Bearer ${access_token}`,
         },

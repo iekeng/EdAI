@@ -13,7 +13,7 @@ function CurriculumSelect() {
       const access_token = localStorage.getItem('access_token');
 
       if (access_token) {
-        const response = await fetch('/user/curriculum', {
+        const response = await fetch('/api/user/curriculum', {
           headers: {
             Authorization: `Bearer ${access_token}`,
           },

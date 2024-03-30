@@ -22,7 +22,7 @@ const SignUpForm = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('/countries')
+    fetch('/api/countries')
       .then(response => response.json())
       .then(data => {
         setCountries(data);
@@ -33,7 +33,7 @@ const SignUpForm = () => {
   }, []);
 
   const fetchCurriculumsByCountry = (countryId) => {
-    fetch(`/country/${countryId}/curriculums`)
+    fetch(`/api/country/${countryId}/curriculums`)
       .then(response => response.json())
       .then(data => {
         // Assuming the response contains an array of curriculums
@@ -108,7 +108,7 @@ const SignUpForm = () => {
     );
 
     // Make the profile details POST request
-    fetch('/post/profile', {
+    fetch('/api/post/profile', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
